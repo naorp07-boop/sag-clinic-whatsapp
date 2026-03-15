@@ -41,12 +41,21 @@ app.post("/webhook/order", async (req, res) => {
 
   try {
     const body = req.body;
-    console.log("Raw payload:", JSON.stringify(body, null, 2));
+    console.log("=== FULL BODY FROM WIX ===");
+    console.log(JSON.stringify(body, null, 2));
+    console.log("=========================");
 
     // Extract buyer info
     const firstName = body?.buyerInfo?.firstName || "לקוח יקר";
     const rawPhone = body?.buyerInfo?.phone;
-    const productName = body?.lineItems?.[0]?.name;
+
+    // Try all possible product name fields Wix may send
+    const lineItem = body?.lineItems?.[0];
+    const productName =
+      lineItem?.name ||
+      lineItem?.productName ||
+      lineItem?.title ||
+      body?.orderedItems?.[0]?.name;
 
     console.log(`👤 Customer: ${firstName}`);
     console.log(`📞 Raw phone: ${rawPhone}`);
