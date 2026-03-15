@@ -1,0 +1,14 @@
+{
+  "name": "sag-clinic-whatsapp",
+  "version": "1.0.0",
+  "description": "WhatsApp automation for SAG Clinic orders via Wix webhook",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "twilio": "^4.19.0",
+    "dotenv": "^16.3.1"
+  }
+}
