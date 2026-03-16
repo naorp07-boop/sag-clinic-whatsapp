@@ -100,7 +100,7 @@ app.post("/webhook/order", async (req, res) => {
     const textMsg = await client.messages.create({
       from: process.env.TWILIO_WHATSAPP_FROM,
       to: toNumber,
-      contentSid: "HX447351814eb80d4913f664d0270154a0",
+      contentSid: "HX10c075337bf9c444e3d6fdb1c56a3951",
       contentVariables: JSON.stringify({
         "1": customerName,
         "2": productName,
