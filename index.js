@@ -56,7 +56,7 @@ app.post("/webhook/order", async (req, res) => {
     console.log("=========================");
 
     // Extract buyer info
-    const firstName = body?.buyerInfo?.firstName || "לקוח יקר";
+    const customerName = body?.buyerInfo?.firstName || "לקוח יקר";
     const rawPhone = body?.buyerInfo?.phone;
 
     // Try all possible product name fields Wix may send
@@ -67,7 +67,7 @@ app.post("/webhook/order", async (req, res) => {
       lineItem?.title ||
       body?.orderedItems?.[0]?.name;
 
-    console.log(`👤 Customer: ${firstName}`);
+    console.log(`👤 Customer: ${customerName}`);
     console.log(`📞 Raw phone: ${rawPhone}`);
     console.log(`🛍️ Product: ${productName}`);
 
@@ -81,8 +81,8 @@ app.post("/webhook/order", async (req, res) => {
       return res.status(400).json({ error: "Missing product name" });
     }
 
-    const toPhone = formatIsraeliPhone(rawPhone);
-    console.log(`📱 Formatted phone: ${toPhone}`);
+    const toNumber = formatIsraeliPhone(rawPhone);
+    console.log(`📱 Formatted phone: ${toNumber}`);
 
     const product = findProduct(productName);
 
@@ -95,22 +95,26 @@ app.post("/webhook/order", async (req, res) => {
 
     const client = getTwilioClient();
 
-    // Send message using Content Template (includes PDF link as {{3}})
+    // Send message via Content Template only
     console.log("📤 Sending WhatsApp template message...");
     const textMsg = await client.messages.create({
       from: process.env.TWILIO_WHATSAPP_FROM,
-      to: toPhone,
+      to: toNumber,
       contentSid: "HX447351814eb80d4913f664d0270154a0",
-      contentVariables: JSON.stringify({ "1": firstName, "2": product.name, "3": product.pdfUrl }),
+      contentVariables: JSON.stringify({
+        "1": customerName,
+        "2": productName,
+        "3": product.pdfUrl
+      })
     });
     console.log(`✅ Template message sent. SID: ${textMsg.sid}`);
 
-    // Send confirmation to admin
+    // Send confirmation to admin (free text)
     const now = new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" });
     const adminMsg = await client.messages.create({
       from: process.env.TWILIO_WHATSAPP_FROM,
       to: "whatsapp:+972532269415",
-      body: `✅ הודעה נשלחה!\n👤 לקוח: ${firstName}\n📦 מוצר: ${product.name}\n📱 טלפון: ${rawPhone}\n🕐 שעה: ${now}`,
+      body: `✅ הודעה נשלחה!\n👤 לקוח: ${customerName}\n📦 מוצר: ${productName}\n📱 טלפון: ${rawPhone}\n🕐 שעה: ${now}`,
     });
     console.log(`✅ Admin notification sent. SID: ${adminMsg.sid}`);
 
