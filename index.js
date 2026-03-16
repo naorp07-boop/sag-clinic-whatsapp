@@ -105,7 +105,16 @@ app.post("/webhook/order", async (req, res) => {
     });
     console.log(`✅ PDF sent. SID: ${pdfMsg.sid}`);
 
-    res.json({ success: true, textSid: textMsg.sid, pdfSid: pdfMsg.sid });
+    // Send confirmation to admin
+    const now = new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" });
+    const adminMsg = await client.messages.create({
+      from: process.env.TWILIO_WHATSAPP_FROM,
+      to: "whatsapp:+972532269415",
+      body: `✅ הודעה נשלחה!\n👤 לקוח: ${firstName}\n📦 מוצר: ${product.name}\n📱 טלפון: ${rawPhone}\n🕐 שעה: ${now}`,
+    });
+    console.log(`✅ Admin notification sent. SID: ${adminMsg.sid}`);
+
+    res.json({ success: true, textSid: textMsg.sid, pdfSid: pdfMsg.sid, adminSid: adminMsg.sid });
   } catch (err) {
     console.error("❌ Error processing order:", err.message);
     res.status(500).json({ error: err.message });
