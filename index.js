@@ -93,17 +93,17 @@ app.post("/webhook/order", async (req, res) => {
 
     console.log(`✅ Matched product: ${product.name}`);
 
-    const messageText = product.message(firstName);
-
-    // Send text message
     const client = getTwilioClient();
-    console.log("📤 Sending WhatsApp text message...");
+
+    // Send message using Content Template
+    console.log("📤 Sending WhatsApp template message...");
     const textMsg = await client.messages.create({
       from: process.env.TWILIO_WHATSAPP_FROM,
       to: toPhone,
-      body: messageText,
+      contentSid: "HX852cdfebd23a607d71b3325aeeb03f98",
+      contentVariables: JSON.stringify({ "1": firstName, "2": product.name }),
     });
-    console.log(`✅ Text message sent. SID: ${textMsg.sid}`);
+    console.log(`✅ Template message sent. SID: ${textMsg.sid}`);
 
     // Send PDF
     console.log("📎 Sending PDF...");
