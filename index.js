@@ -95,25 +95,15 @@ app.post("/webhook/order", async (req, res) => {
 
     const client = getTwilioClient();
 
-    // Send message using Content Template
+    // Send message using Content Template (includes PDF link as {{3}})
     console.log("📤 Sending WhatsApp template message...");
     const textMsg = await client.messages.create({
       from: process.env.TWILIO_WHATSAPP_FROM,
       to: toPhone,
-      contentSid: "HX1a0ed5fa661450b1c1a2e5e18cca6edf",
-      contentVariables: JSON.stringify({ "1": firstName, "2": product.name }),
+      contentSid: "HX447351814eb80d4913f664d0270154a0",
+      contentVariables: JSON.stringify({ "1": firstName, "2": product.name, "3": product.pdfUrl }),
     });
     console.log(`✅ Template message sent. SID: ${textMsg.sid}`);
-
-    // Send PDF
-    console.log("📎 Sending PDF...");
-    const pdfMsg = await client.messages.create({
-      from: process.env.TWILIO_WHATSAPP_FROM,
-      to: toPhone,
-      body: "📄 המדריך שלך מצורף כאן:",
-      mediaUrl: [product.pdfUrl],
-    });
-    console.log(`✅ PDF sent. SID: ${pdfMsg.sid}`);
 
     // Send confirmation to admin
     const now = new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" });
@@ -124,7 +114,7 @@ app.post("/webhook/order", async (req, res) => {
     });
     console.log(`✅ Admin notification sent. SID: ${adminMsg.sid}`);
 
-    res.json({ success: true, textSid: textMsg.sid, pdfSid: pdfMsg.sid, adminSid: adminMsg.sid });
+    res.json({ success: true, textSid: textMsg.sid, adminSid: adminMsg.sid });
   } catch (err) {
     console.error("❌ Error processing order:", err.message);
     res.status(500).json({ error: err.message });

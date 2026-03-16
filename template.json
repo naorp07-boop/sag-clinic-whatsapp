@@ -1,0 +1,9 @@
+{
+  "friendly_name": "sag_clinic_product_order_v2",
+  "language": "he",
+  "types": {
+    "twilio/text": {
+      "body": "שלום {{1}}! 💚\nתודה שרכשת {{2}} מ-SAG Clinic.\nלשאלות — אנחנו כאן בשבילך! 🙏\n📎 המדריך שלך: {{3}}"
+    }
+  }
+}
