@@ -33,7 +33,17 @@ function formatIsraeliPhone(phone) {
 }
 
 app.get("/health", (req, res) => {
-  res.json({ status: "ok", message: "Server is running" });
+  res.json({
+    status: "ok",
+    message: "Server is running",
+    env: {
+      SID_set: !!process.env.TWILIO_ACCOUNT_SID,
+      SID_prefix: process.env.TWILIO_ACCOUNT_SID?.slice(0, 4) || "MISSING",
+      TOKEN_set: !!process.env.TWILIO_AUTH_TOKEN,
+      FROM_set: !!process.env.TWILIO_WHATSAPP_FROM,
+      FROM: process.env.TWILIO_WHATSAPP_FROM || "MISSING",
+    },
+  });
 });
 
 app.post("/webhook/order", async (req, res) => {
