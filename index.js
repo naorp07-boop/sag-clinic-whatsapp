@@ -58,67 +58,72 @@ app.post("/webhook/order", async (req, res) => {
     // Extract buyer info
     const customerName = body?.buyerInfo?.firstName || "לקוח יקר";
     const rawPhone = body?.buyerInfo?.phone;
-
-    // Try all possible product name fields Wix may send
-    const lineItem = body?.lineItems?.[0];
-    const productName =
-      lineItem?.name ||
-      lineItem?.productName ||
-      lineItem?.title ||
-      body?.orderedItems?.[0]?.name;
+    const lineItems = body?.lineItems || body?.orderedItems || [];
 
     console.log(`👤 Customer: ${customerName}`);
     console.log(`📞 Raw phone: ${rawPhone}`);
-    console.log(`🛍️ Product: ${productName}`);
+    console.log(`🛒 Items count: ${lineItems.length}`);
 
     if (!rawPhone) {
       console.warn("⚠️ No phone number in order");
       return res.status(400).json({ error: "Missing phone number" });
     }
 
-    if (!productName) {
-      console.warn("⚠️ No product name in order");
-      return res.status(400).json({ error: "Missing product name" });
+    if (!lineItems.length) {
+      console.warn("⚠️ No line items in order");
+      return res.status(400).json({ error: "Missing line items" });
     }
 
     const toNumber = formatIsraeliPhone(rawPhone);
     console.log(`📱 Formatted phone: ${toNumber}`);
 
-    const product = findProduct(productName);
+    const client = getTwilioClient();
+    const sentProducts = [];
 
-    if (!product) {
-      console.warn(`⚠️ Product not found: ${productName}`);
-      return res.status(404).json({ error: `Product not found: ${productName}` });
+    for (const item of lineItems) {
+      const productName = item?.name || item?.productName || item?.title;
+      if (!productName) continue;
+
+      const product = findProduct(productName);
+      if (!product) {
+        console.log(`⏭️ Skipping unknown product: ${productName}`);
+        continue;
+      }
+
+      console.log(`📤 Sending template for: ${product.name}`);
+      const msg = await client.messages.create({
+        from: process.env.TWILIO_WHATSAPP_FROM,
+        to: toNumber,
+        contentSid: "HX10c075337bf9c444e3d6fdb1c56a3951",
+        contentVariables: JSON.stringify({
+          "1": customerName,
+          "2": product.name,
+          "3": product.pdfUrl
+        })
+      });
+      console.log(`✅ Sent. SID: ${msg.sid}`);
+      sentProducts.push(product.name);
+
+      if (lineItems.indexOf(item) < lineItems.length - 1) {
+        await new Promise((r) => setTimeout(r, 2000));
+      }
     }
 
-    console.log(`✅ Matched product: ${product.name}`);
-
-    const client = getTwilioClient();
-
-    // Send message via Content Template only
-    console.log("📤 Sending WhatsApp template message...");
-    const textMsg = await client.messages.create({
-      from: process.env.TWILIO_WHATSAPP_FROM,
-      to: toNumber,
-      contentSid: "HX10c075337bf9c444e3d6fdb1c56a3951",
-      contentVariables: JSON.stringify({
-        "1": customerName,
-        "2": productName,
-        "3": product.pdfUrl
-      })
-    });
-    console.log(`✅ Template message sent. SID: ${textMsg.sid}`);
+    if (!sentProducts.length) {
+      console.warn("⚠️ No matching products found in order");
+      return res.status(404).json({ error: "No matching products found" });
+    }
 
     // Send confirmation to admin (free text)
     const now = new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" });
     const adminMsg = await client.messages.create({
       from: process.env.TWILIO_WHATSAPP_FROM,
       to: "whatsapp:+972532269415",
-      body: `✅ הודעה נשלחה!\n👤 לקוח: ${customerName}\n📦 מוצר: ${productName}\n📱 טלפון: ${rawPhone}\n🕐 שעה: ${now}`,
+      body: `✅ נשלחו ${sentProducts.length} הודעות!\n👤 לקוח: ${customerName}\n📦 מוצרים: ${sentProducts.join(", ")}\n📱 טלפון: ${rawPhone}\n🕐 שעה: ${now}`,
     });
     console.log(`✅ Admin notification sent. SID: ${adminMsg.sid}`);
 
-    res.json({ success: true, textSid: textMsg.sid, adminSid: adminMsg.sid });
+    res.json({ success: true, sentProducts, adminSid: adminMsg.sid });
   } catch (err) {
     console.error("❌ Error processing order:", err.message);
     res.status(500).json({ error: err.message });
