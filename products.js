@@ -14,9 +14,11 @@ const products = [
 ];
 
 function findProduct(productName) {
-  return products.find((p) =>
-    productName.includes(p.name) || p.name.includes(productName)
-  );
+  const normalized = productName.replace(/\s*\|\s*/g, " ").trim();
+  return products.find((p) => {
+    const pNorm = p.name.replace(/\s*\|\s*/g, " ").trim();
+    return normalized.includes(pNorm) || pNorm.includes(normalized);
+  });
 }
 
 module.exports = { products, findProduct };
