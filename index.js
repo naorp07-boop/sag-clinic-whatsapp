@@ -56,10 +56,13 @@ app.post("/webhook/order", async (req, res) => {
     console.log(JSON.stringify(body, null, 2));
     console.log("=========================");
 
+    // Wix wraps payload in body.data — support both formats
+    const data = body?.data || body;
+
     // Extract buyer info
-    const customerName = body?.buyerInfo?.firstName || "לקוח יקר";
-    const rawPhone = body?.buyerInfo?.phone;
-    const lineItems = body?.lineItems || body?.orderedItems || [];
+    const customerName = data?.buyerInfo?.firstName || "לקוח יקר";
+    const rawPhone = data?.buyerInfo?.phone;
+    const lineItems = data?.lineItems || data?.orderedItems || [];
 
     console.log(`👤 Customer: ${customerName}`);
     console.log(`📞 Raw phone: ${rawPhone}`);
@@ -82,7 +85,7 @@ app.post("/webhook/order", async (req, res) => {
     const sentProducts = [];
 
     for (const item of lineItems) {
-      const productName = item?.name || item?.productName || item?.title;
+      const productName = item?.name || item?.itemName || item?.productName || item?.title;
       if (!productName) continue;
 
       const product = findProduct(productName);
