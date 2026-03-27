@@ -95,32 +95,18 @@ app.post("/webhook/order", async (req, res) => {
         continue;
       }
 
-      // 1. Send template message
-      console.log(`📤 Sending template for: ${product.name}`);
+      // Send product-specific message from spreadsheet
+      console.log(`📤 Sending message for: ${product.name}`);
       const msg = await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_FROM,
         to: toNumber,
-        contentSid: "HX10c075337bf9c444e3d6fdb1c56a3951",
+        contentSid: "HX6218aaf73ed58916ac7d2d8946f23df3",
         contentVariables: JSON.stringify({
-          "1": customerName,
-          "2": product.name,
-          "3": product.media[0] || "",
+          "1": product.message,
         }),
       });
-      console.log(`✅ Template sent. SID: ${msg.sid}`);
+      console.log(`✅ Message sent. SID: ${msg.sid}`);
       sentProducts.push(product.name);
-
-      // 2. Send each media link as a separate message
-      for (const url of product.media) {
-        await delay(2000);
-        console.log(`📎 Sending media: ${url}`);
-        const mediaMsg = await client.messages.create({
-          from: process.env.TWILIO_WHATSAPP_FROM,
-          to: toNumber,
-          body: url,
-        });
-        console.log(`✅ Media sent. SID: ${mediaMsg.sid}`);
-      }
 
       // Delay between products (if more than one)
       if (lineItems.indexOf(item) < lineItems.length - 1) {
