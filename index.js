@@ -133,14 +133,20 @@ app.post("/webhook/order", async (req, res) => {
       return res.status(404).json({ error: "No matching products found" });
     }
 
-    // Send confirmation to admin
+    // Send confirmation to admin using dedicated template
     let adminSid = null;
     try {
       const now = new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" });
       const adminMsg = await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_FROM,
         to: "whatsapp:+972532269415",
-        body: `✅ הודעה נשלחה!\n👤 לקוח: ${customerName}\n📦 מוצר: ${sentProducts.join(", ")}\n📱 טלפון: ${rawPhone}\n🕐 שעה: ${now}`,
+        contentSid: "HX6b1e7cfb7b37b80c6c4569da524b2d81",
+        contentVariables: JSON.stringify({
+          "1": customerName,
+          "2": sentProducts.join(", "),
+          "3": rawPhone,
+          "4": now,
+        }),
       });
       adminSid = adminMsg.sid;
       console.log(`✅ Admin notification sent. SID: ${adminMsg.sid}`);
