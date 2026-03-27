@@ -36,7 +36,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     message: "Server is running",
-    version: "multi-product-v1",
+    version: "product-message-v2",
     env: {
       SID_set: !!process.env.TWILIO_ACCOUNT_SID,
       SID_prefix: process.env.TWILIO_ACCOUNT_SID?.slice(0, 4) || "MISSING",
