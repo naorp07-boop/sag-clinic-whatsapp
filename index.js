@@ -83,6 +83,7 @@ app.post("/webhook/order", async (req, res) => {
 
     const client = getTwilioClient();
     const sentProducts = [];
+    const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
     for (const item of lineItems) {
       const productName = item?.name || item?.itemName || item?.productName || item?.title;
@@ -94,6 +95,7 @@ app.post("/webhook/order", async (req, res) => {
         continue;
       }
 
+      // 1. Send template message
       console.log(`📤 Sending template for: ${product.name}`);
       const msg = await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_FROM,
@@ -102,14 +104,27 @@ app.post("/webhook/order", async (req, res) => {
         contentVariables: JSON.stringify({
           "1": customerName,
           "2": product.name,
-          "3": product.pdfUrl
-        })
+          "3": product.media[0] || "",
+        }),
       });
-      console.log(`✅ Sent. SID: ${msg.sid}`);
+      console.log(`✅ Template sent. SID: ${msg.sid}`);
       sentProducts.push(product.name);
 
+      // 2. Send each media link as a separate message
+      for (const url of product.media) {
+        await delay(2000);
+        console.log(`📎 Sending media: ${url}`);
+        const mediaMsg = await client.messages.create({
+          from: process.env.TWILIO_WHATSAPP_FROM,
+          to: toNumber,
+          body: url,
+        });
+        console.log(`✅ Media sent. SID: ${mediaMsg.sid}`);
+      }
+
+      // Delay between products (if more than one)
       if (lineItems.indexOf(item) < lineItems.length - 1) {
-        await new Promise((r) => setTimeout(r, 2000));
+        await delay(2000);
       }
     }
 
