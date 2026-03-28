@@ -13,6 +13,18 @@ function getTwilioClient() {
   );
 }
 
+const FOOTER = "*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*";
+
+function cleanMessage(message) {
+  return message
+    .replace(FOOTER, "")
+    .split("\n")
+    .filter((line) => !line.trim().startsWith("👉"))
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function formatIsraeliPhone(phone) {
   // Remove all non-digit characters
   let digits = phone.replace(/\D/g, "");
@@ -36,7 +48,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     message: "Server is running",
-    version: "product-message-v2",
+    version: "v4-template",
     env: {
       SID_set: !!process.env.TWILIO_ACCOUNT_SID,
       SID_prefix: process.env.TWILIO_ACCOUNT_SID?.slice(0, 4) || "MISSING",
@@ -95,14 +107,17 @@ app.post("/webhook/order", async (req, res) => {
         continue;
       }
 
-      // Send product-specific message from spreadsheet
+      // Send product-specific message using new template
       console.log(`📤 Sending message for: ${product.name}`);
+      const msgBody = cleanMessage(product.message);
+      const mediaLinks = product.media.length > 0 ? product.media.join("\n") : "ללא קובץ מצורף";
       const msg = await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_FROM,
         to: toNumber,
-        contentSid: "HX6218aaf73ed58916ac7d2d8946f23df3",
+        contentSid: "HX0f62fca01f9354e454adc32938357d77",
         contentVariables: JSON.stringify({
-          "1": product.message,
+          "1": msgBody,
+          "2": mediaLinks,
         }),
       });
       console.log(`✅ Message sent. SID: ${msg.sid}`);
