@@ -13,18 +13,6 @@ function getTwilioClient() {
   );
 }
 
-const FOOTER = "*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*";
-
-function cleanMessage(message) {
-  return message
-    .replace(FOOTER, "")
-    .split("\n")
-    .filter((line) => !line.trim().startsWith("👉"))
-    .join("\n")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
-}
-
 function formatIsraeliPhone(phone) {
   // Remove all non-digit characters
   let digits = phone.replace(/\D/g, "");
@@ -48,7 +36,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     message: "Server is running",
-    version: "v4-template",
+    version: "v3-approved",
     env: {
       SID_set: !!process.env.TWILIO_ACCOUNT_SID,
       SID_prefix: process.env.TWILIO_ACCOUNT_SID?.slice(0, 4) || "MISSING",
@@ -107,17 +95,16 @@ app.post("/webhook/order", async (req, res) => {
         continue;
       }
 
-      // Send product-specific message using new template
+      // Send message using approved template (sag_clinic_product_order_v3)
       console.log(`📤 Sending message for: ${product.name}`);
-      const msgBody = cleanMessage(product.message);
-      const mediaLinks = product.media.length > 0 ? product.media.join("\n") : "ללא קובץ מצורף";
       const msg = await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_FROM,
         to: toNumber,
-        contentSid: "HX0f62fca01f9354e454adc32938357d77",
+        contentSid: "HX10c075337bf9c444e3d6fdb1c56a3951",
         contentVariables: JSON.stringify({
-          "1": msgBody,
-          "2": mediaLinks,
+          "1": customerName,
+          "2": product.name,
+          "3": product.media[0] || "",
         }),
       });
       console.log(`✅ Message sent. SID: ${msg.sid}`);
@@ -134,20 +121,14 @@ app.post("/webhook/order", async (req, res) => {
       return res.status(404).json({ error: "No matching products found" });
     }
 
-    // Send confirmation to admin using dedicated template
+    // Send confirmation to admin (freeform — works within sandbox/session window)
     let adminSid = null;
     try {
       const now = new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" });
       const adminMsg = await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_FROM,
         to: "whatsapp:+972532269415",
-        contentSid: "HXb0b4429d6d823e849ad6ffd68bbf8e06",
-        contentVariables: JSON.stringify({
-          "1": customerName,
-          "2": sentProducts.join(", "),
-          "3": rawPhone,
-          "4": now,
-        }),
+        body: `✅ הודעה נשלחה!\n👤 לקוח: ${customerName}\n📦 מוצר: ${sentProducts.join(", ")}\n📱 טלפון: ${rawPhone}\n🕐 שעה: ${now}`,
       });
       adminSid = adminMsg.sid;
       console.log(`✅ Admin notification sent. SID: ${adminMsg.sid}`);
