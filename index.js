@@ -36,7 +36,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     message: "Server is running",
-    version: "v3-approved",
+    version: "v7-approved",
     env: {
       SID_set: !!process.env.TWILIO_ACCOUNT_SID,
       SID_prefix: process.env.TWILIO_ACCOUNT_SID?.slice(0, 4) || "MISSING",
@@ -100,7 +100,7 @@ app.post("/webhook/order", async (req, res) => {
       const msg = await client.messages.create({
         from: process.env.TWILIO_WHATSAPP_FROM,
         to: toNumber,
-        contentSid: "HX10c075337bf9c444e3d6fdb1c56a3951",
+        contentSid: "HXa969b1d6cc99f69ca994be8ef176e0e2",
         contentVariables: JSON.stringify({
           "1": customerName,
           "2": product.name,
