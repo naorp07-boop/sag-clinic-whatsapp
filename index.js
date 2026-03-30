@@ -47,6 +47,14 @@ app.get("/health", (req, res) => {
   });
 });
 
+// Debug endpoint — always returns 200, logs everything received
+app.post("/webhook/debug", (req, res) => {
+  console.log("🔍 DEBUG webhook hit!");
+  console.log("Headers:", JSON.stringify(req.headers, null, 2));
+  console.log("Body:", JSON.stringify(req.body, null, 2));
+  res.json({ received: true, body: req.body });
+});
+
 app.post("/webhook/order", async (req, res) => {
   console.log("📦 Received order webhook");
 
