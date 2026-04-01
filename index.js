@@ -160,7 +160,7 @@ app.post("/webhook/order", async (req, res) => {
         const pickupMsg = await client.messages.create({
           from: process.env.TWILIO_WHATSAPP_FROM,
           to: toNumber,
-          contentSid: "HX7c3be8cda551dda5deef40c71090adbb",
+          contentSid: "HXbf5fc8087b19b8608e1f273c762793cf",
         });
         console.log(`🏪 Pickup message sent. SID: ${pickupMsg.sid}`);
       } catch (pickupErr) {
