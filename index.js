@@ -92,6 +92,9 @@ app.post("/webhook/order", async (req, res) => {
       data?.logistics?.contactDetails?.phone ||
       contactPhone;
     const lineItems = data?.lineItems || data?.orderedItems || [];
+    const isPickup = data?.logistics?.shippingDestination?.pickupMethod === "STORE_PICKUP" ||
+                     !data?.logistics?.contactDetails;
+    const deliveryType = isPickup ? "🏪 איסוף מהקליניקה" : "🚚 משלוח";
 
     console.log(`👤 Customer: ${customerName}`);
     console.log(`📞 Raw phone: ${rawPhone}`);
@@ -150,6 +153,21 @@ app.post("/webhook/order", async (req, res) => {
       return res.status(404).json({ error: "No matching products found" });
     }
 
+    // For pickup orders — send pickup coordination message to customer
+    if (isPickup) {
+      try {
+        await delay(2000);
+        const pickupMsg = await client.messages.create({
+          from: process.env.TWILIO_WHATSAPP_FROM,
+          to: toNumber,
+          contentSid: "HX7c3be8cda551dda5deef40c71090adbb",
+        });
+        console.log(`🏪 Pickup message sent. SID: ${pickupMsg.sid}`);
+      } catch (pickupErr) {
+        console.error("⚠️ Pickup message failed (template may be pending approval):", pickupErr.message);
+      }
+    }
+
     // Send confirmation to admin using approved template (no session window needed)
     let adminSid = null;
     try {
@@ -162,7 +180,7 @@ app.post("/webhook/order", async (req, res) => {
           "1": customerName,
           "2": sentProducts.join(", "),
           "3": rawPhone,
-          "4": now,
+          "4": `${now} | ${deliveryType}`,
         }),
       });
       adminSid = adminMsg.sid;
