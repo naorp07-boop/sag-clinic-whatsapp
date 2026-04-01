@@ -67,22 +67,30 @@ app.post("/webhook/order", async (req, res) => {
     // Wix wraps payload in body.data — support both formats
     const data = body?.data || body;
 
-    // Extract buyer info (support all Wix payload formats)
+    // Extract buyer info (support all Wix payload formats incl. store pickup)
     const firstName =
       data?.buyerInfo?.firstName ||
       data?.contactDetails?.firstName ||
       data?.logistics?.contactDetails?.firstName ||
+      data?.contact?.name?.first ||
       "";
     const lastName =
       data?.buyerInfo?.lastName ||
       data?.contactDetails?.lastName ||
       data?.logistics?.contactDetails?.lastName ||
+      data?.contact?.name?.last ||
       "";
     const customerName = [firstName, lastName].filter(Boolean).join(" ") || "לקוח יקר";
+    const contactPhone =
+      data?.contact?.phones?.find((p) => p.primary)?.e164Phone ||
+      data?.contact?.phones?.[0]?.e164Phone ||
+      data?.contact?.phones?.find((p) => p.primary)?.phone ||
+      data?.contact?.phones?.[0]?.phone;
     const rawPhone =
       data?.buyerInfo?.phone ||
       data?.contactDetails?.phone ||
-      data?.logistics?.contactDetails?.phone;
+      data?.logistics?.contactDetails?.phone ||
+      contactPhone;
     const lineItems = data?.lineItems || data?.orderedItems || [];
 
     console.log(`👤 Customer: ${customerName}`);
