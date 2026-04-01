@@ -67,9 +67,16 @@ app.post("/webhook/order", async (req, res) => {
     // Wix wraps payload in body.data — support both formats
     const data = body?.data || body;
 
-    // Extract buyer info (support both Wix payload formats)
-    const customerName = data?.buyerInfo?.firstName || data?.contactDetails?.firstName || "לקוח יקר";
-    const rawPhone = data?.buyerInfo?.phone || data?.contactDetails?.phone;
+    // Extract buyer info (support all Wix payload formats)
+    const customerName =
+      data?.buyerInfo?.firstName ||
+      data?.contactDetails?.firstName ||
+      data?.logistics?.contactDetails?.firstName ||
+      "לקוח יקר";
+    const rawPhone =
+      data?.buyerInfo?.phone ||
+      data?.contactDetails?.phone ||
+      data?.logistics?.contactDetails?.phone;
     const lineItems = data?.lineItems || data?.orderedItems || [];
 
     console.log(`👤 Customer: ${customerName}`);
