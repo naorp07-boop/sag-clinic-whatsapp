@@ -92,8 +92,7 @@ app.post("/webhook/order", async (req, res) => {
       data?.logistics?.contactDetails?.phone ||
       contactPhone;
     const lineItems = data?.lineItems || data?.orderedItems || [];
-    const isPickup = data?.logistics?.shippingDestination?.pickupMethod === "STORE_PICKUP" ||
-                     !data?.logistics?.contactDetails;
+    const isPickup = data?.logistics?.shippingDestination?.pickupMethod === "STORE_PICKUP";
     const deliveryType = isPickup ? "🏪 איסוף מהקליניקה" : "🚚 משלוח";
 
     console.log(`👤 Customer: ${customerName}`);
