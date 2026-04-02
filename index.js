@@ -68,16 +68,19 @@ app.post("/webhook/order", async (req, res) => {
     const data = body?.data || body;
 
     // Extract buyer info (support all Wix payload formats incl. store pickup)
+    const shipContact = data?.logistics?.shippingDestination?.contactDetails;
     const firstName =
       data?.buyerInfo?.firstName ||
       data?.contactDetails?.firstName ||
       data?.logistics?.contactDetails?.firstName ||
+      shipContact?.firstName ||
       data?.contact?.name?.first ||
       "";
     const lastName =
       data?.buyerInfo?.lastName ||
       data?.contactDetails?.lastName ||
       data?.logistics?.contactDetails?.lastName ||
+      shipContact?.lastName ||
       data?.contact?.name?.last ||
       "";
     const customerName = [firstName, lastName].filter(Boolean).join(" ") || "לקוח יקר";
@@ -90,6 +93,7 @@ app.post("/webhook/order", async (req, res) => {
       data?.buyerInfo?.phone ||
       data?.contactDetails?.phone ||
       data?.logistics?.contactDetails?.phone ||
+      shipContact?.phone ||
       contactPhone;
     const lineItems = data?.lineItems || data?.orderedItems || [];
     const isPickup = data?.logistics?.shippingDestination?.pickupMethod === "STORE_PICKUP";
