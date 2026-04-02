@@ -47,6 +47,44 @@ app.get("/health", (req, res) => {
   });
 });
 
+// Media redirect endpoint — redirects to Cloudinary URL by product key
+const MEDIA_MAP = {
+  "facial-cleanser":      "https://res.cloudinary.com/dfwsuzo3o/video/upload/facial-cleanser.mp4",
+  "facial-toner":         "https://res.cloudinary.com/dfwsuzo3o/video/upload/facial-toner.mp4",
+  "moisturizer-normal":   "https://res.cloudinary.com/dfwsuzo3o/video/upload/moisturizer-normal.mp4",
+  "moisturizer-oily":     "https://res.cloudinary.com/dfwsuzo3o/video/upload/moisturizer-oily.mp4",
+  "brightening-serum-day":"https://res.cloudinary.com/dfwsuzo3o/video/upload/brightening-serum-day.mp4",
+  "brightening-serum-night":"https://res.cloudinary.com/dfwsuzo3o/video/upload/brightening-serum-night.mp4",
+  "body-serum":           "https://res.cloudinary.com/dfwsuzo3o/video/upload/body-serum.mp4",
+  "hyaluronic-serum":     "https://res.cloudinary.com/dfwsuzo3o/video/upload/hyaluronic-serum.mp4",
+  "repair-serum":         "https://res.cloudinary.com/dfwsuzo3o/video/upload/repair-serum.mp4",
+  "anti-wrinkle-serum":   "https://res.cloudinary.com/dfwsuzo3o/video/upload/anti-wrinkle-serum.mp4",
+  "body-acne-treatment":  "https://res.cloudinary.com/dfwsuzo3o/video/upload/body-acne-treatment.mp4",
+  "face-acne-treatment":  "https://res.cloudinary.com/dfwsuzo3o/video/upload/face-acne-treatment.mp4",
+  "oily-skin-gel":        "https://res.cloudinary.com/dfwsuzo3o/video/upload/oily-skin-gel.mp4",
+  "acne-gel":             "https://res.cloudinary.com/dfwsuzo3o/video/upload/acne-gel.mp4",
+  "soothing-cream":       "https://res.cloudinary.com/dfwsuzo3o/video/upload/soothing-cream.mp4",
+  "spf50-makeup":         "https://res.cloudinary.com/dfwsuzo3o/video/upload/spf50-makeup.mp4",
+  "spf50-moisturizer":    "https://res.cloudinary.com/dfwsuzo3o/video/upload/spf50-moisturizer.mp4",
+  "eyebrow-gel":          "https://res.cloudinary.com/dfwsuzo3o/video/upload/eyebrow-gel.mp4",
+  "cupping-glow-set":     "https://res.cloudinary.com/dfwsuzo3o/video/upload/cupping-glow-set.mp4",
+  "lymphatic-guide-video":"https://res.cloudinary.com/dfwsuzo3o/video/upload/lymphatic-guide-video.mp4",
+  "kit-acne":             "https://res.cloudinary.com/dfwsuzo3o/image/upload/kit-acne.jpg",
+  "kit-oily":             "https://res.cloudinary.com/dfwsuzo3o/image/upload/kit-oily.jpg",
+  "kit-brightening":      "https://res.cloudinary.com/dfwsuzo3o/image/upload/kit-brightening.jpg",
+  "kit-4":                "https://res.cloudinary.com/dfwsuzo3o/image/upload/kit-4.jpg",
+  "kit-basic-glow":       "https://res.cloudinary.com/dfwsuzo3o/image/upload/kit-basic-glow.jpg",
+  "kit-antiaging":        "https://res.cloudinary.com/dfwsuzo3o/image/upload/kit-antiaging.jpg",
+  "kit-antiaging-vip":    "https://res.cloudinary.com/dfwsuzo3o/image/upload/kit-antiaging-vip.jpg",
+  "lymphatic-guide-pdf":  "https://raw.githubusercontent.com/naorp07-boop/sag-clinic-whatsapp/master/guides/lymphatic-guide.pdf",
+};
+
+app.get("/media/:key", (req, res) => {
+  const url = MEDIA_MAP[req.params.key];
+  if (!url) return res.status(404).json({ error: "Not found" });
+  res.redirect(301, url);
+});
+
 // Debug endpoint — always returns 200, logs everything received
 app.post("/webhook/debug", (req, res) => {
   console.log("🔍 DEBUG webhook hit!");
