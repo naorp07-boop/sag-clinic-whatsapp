@@ -36,7 +36,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     message: "Server is running",
-    version: "v7-approved",
+    version: "v8-cloudinary",
     env: {
       SID_set: !!process.env.TWILIO_ACCOUNT_SID,
       SID_prefix: process.env.TWILIO_ACCOUNT_SID?.slice(0, 4) || "MISSING",
@@ -168,20 +168,52 @@ app.post("/webhook/order", async (req, res) => {
         continue;
       }
 
-      // Send message using approved template (sag_clinic_product_order_v3)
       console.log(`📤 Sending message for: ${product.name}`);
-      const msg = await client.messages.create({
-        from: process.env.TWILIO_WHATSAPP_FROM,
-        to: toNumber,
-        contentSid: "HXa969b1d6cc99f69ca994be8ef176e0e2",
-        contentVariables: JSON.stringify({
-          "1": customerName,
-          "2": product.name,
-          "3": product.media[0] || "",
-        }),
-      });
-      console.log(`✅ Message sent. SID: ${msg.sid}`);
+
+      if (product.cloudinaryUrl) {
+        // v2 media template — sends video/image + short custom message
+        const msg = await client.messages.create({
+          from: process.env.TWILIO_WHATSAPP_FROM,
+          to: toNumber,
+          contentSid: "HX5abbc995fc229fb5bab33a1f2fcc8051",
+          contentVariables: JSON.stringify({
+            "1": customerName,
+            "2": product.name,
+            "3": product.shortMessage || "",
+            "4": product.cloudinaryUrl,
+          }),
+        });
+        console.log(`✅ Message sent (v2 media). SID: ${msg.sid}`);
+      } else {
+        // v7 text fallback — for products without Cloudinary media
+        const msg = await client.messages.create({
+          from: process.env.TWILIO_WHATSAPP_FROM,
+          to: toNumber,
+          contentSid: "HXa969b1d6cc99f69ca994be8ef176e0e2",
+          contentVariables: JSON.stringify({
+            "1": customerName,
+            "2": product.name,
+            "3": "",
+          }),
+        });
+        console.log(`✅ Message sent (v7 fallback). SID: ${msg.sid}`);
+      }
       sentProducts.push(product.name);
+
+      // Send lymphatic carousel guide if product requires it (sendPdf=true)
+      if (product.sendPdf) {
+        await delay(2000);
+        try {
+          const guideMsg = await client.messages.create({
+            from: process.env.TWILIO_WHATSAPP_FROM,
+            to: toNumber,
+            contentSid: "HXbf1960ae5c3e540061d762d186cf96f7",
+          });
+          console.log(`📖 Guide carousel sent. SID: ${guideMsg.sid}`);
+        } catch (guideErr) {
+          console.error("⚠️ Guide carousel failed:", guideErr.message);
+        }
+      }
 
       // Delay between products (if more than one)
       if (lineItems.indexOf(item) < lineItems.length - 1) {

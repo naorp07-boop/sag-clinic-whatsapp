@@ -1,192 +1,240 @@
-// products.js — auto-generated from Google Sheet
+// products.js — updated April 2026
+// Fields: name (for matching), cloudinaryUrl (col G), sendPdf (col H), shortMessage (col I)
+// ⚠️ Products without cloudinaryUrl fall back to v7 text-only template
 
 const products = [
   {
     name: "קצף ניקוי פנים",
-    message: "הטיפוח שלך מתחיל עכשיו ✨\nקצף הניקוי בדרך אלייך — וברגע הראשון שמנסים אותו על הפנים, מבינים למה כולם מתאהבים בו.\nמנקה לעומק בלי להרגיש כמו ניקוי — מקציף, רך, ומשאיר את העור מוכן לשאר הטיפוח.\nהנה הסרטון שיראה בדיוק איך להשתמש בו:\n👉 https://drive.google.com/file/d/1QMwypLyEp06LeLAo5-8YJvWkzXFI6ZzR/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על המוצר או רצון לעזרה בבניית שגרת טיפוח אישית? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1QMwypLyEp06LeLAo5-8YJvWkzXFI6ZzR/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122403/facial-cleanser.mp4",
+    sendPdf: false,
+    shortMessage: "*כל שגרת טיפוח טובה, מתחילה בניקוי והכנה של העור*",
   },
   {
     name: "toner | לאיזון עור שמן",
-    message: "עור שמן מתחיל כאן 💧\nהטונר בדרך אלייך — הצעד שרוב האנשים מדלגים עליו, ובדיוק בגללו העור ממשיך להיות שמן.\nמאזן, מכווץ נקבוביות, ומכין את העור לספוג את שאר הטיפוח בצורה הכי טובה שיש.\nהנה הסרטון שיראה איך להשתמש בו נכון:\n👉 https://drive.google.com/file/d/14k9VUWLHl-NGHKXSz4pzcEwMj9bzKBK1/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות או רצון לעזרה בבניית שגרה לעור שמן? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/14k9VUWLHl-NGHKXSz4pzcEwMj9bzKBK1/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122398/facial-toner.mp4",
+    sendPdf: false,
+    shortMessage: "*הטונר שלנו עושה הבדל אמיתי בעור שמן!*",
   },
   {
     name: "מסיכת פילינג משייפת",
-    message: "הפילינג שהעור שלך חיכה לו ✨\nמסיכת הפילינג המשייפת בדרך אלייך — פעמיים בשבוע, ומתחילים לראות עור חלק, מחודש ומוכן לספוג טיפוח.\nעל עור יבש, עיסוי עדין, שטיפה — וההבדל מורגש כבר מהפעם הראשונה.\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הדרך הנכונה להשתמש? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: [],
+    cloudinaryUrl: "",
+    sendPdf: false,
+    shortMessage: "*המסיכה שעושה הבדל אמיתי בעור כבר בשימוש הראשון!*",
   },
   {
     name: "zero shine mask | מסיכה טיפולית לעור שמן",
-    message: "נגמר עם הברק הלא רצוי 💚\nה-Zero Shine Mask בדרך אלייך — המסיכה שמסדרת לעור שמן חשבון אחת ולתמיד.\n15-20 דקות, ומרגישים איך העור נושם, מאוזן ומט — בלי שמנוניות, בלי ברק.\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על שילוב המסיכה בשגרה? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: [],
+    cloudinaryUrl: "",
+    sendPdf: false,
+    shortMessage: "*מסיכה אחת שעושה את כל ההבדל בעור שמן עם פצעונים!*",
   },
   {
     name: "לחות עשירה לעור רגיל",
-    message: "העור שלך מגיע לטיפוח כזה 💛\nקרם הלחות העשירה בדרך אלייך — לחות שמרגישה כמו חיבוק לעור, בלי כבדות ובלי שמנוניות.\nברגע שמורחים — מרגישים את ההבדל.\nהנה הסרטון שיראה איך לקבל את המקסימום ממנו:\n👉 https://drive.google.com/file/d/1qiMMcczlfBOdgqR5tnVaDRrl36Afg90P/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nרצון לעזרה בבניית שגרת לחות מותאמת? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1qiMMcczlfBOdgqR5tnVaDRrl36Afg90P/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122400/moisturizer-normal.mp4",
+    sendPdf: false,
+    shortMessage: "*לחות מושלמת וקטיפתית, ללא תחושת שמנוניות או כבדות*",
   },
   {
     name: "סרום ויטמין C",
-    message: "הזוהר מתחיל עכשיו ✨\nסרום ויטמין C בדרך אלייך — הארקה, אנרגיה ואנטיאוקסידנט בבקבוק אחד.\nהכי חשוב לדעת: בוקר, לפני ה-SPF — ככה הוא עובד הכי טוב.\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על שילוב הסרום בשגרה? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: [],
+    cloudinaryUrl: "",
+    sendPdf: false,
+    shortMessage: "*מומלץ לשימוש בבוקר, לאחר ניקוי עם קצף פנים SAG*",
   },
   {
     name: "לחות מאזנת לעור שמן",
-    message: "כן, גם עור שמן צריך לחות 💚\nקרם הלחות המאזן בדרך אלייך — ובדיוק זה מה שגורם לעור שמן להפסיק לייצר עוד שמן.\nקל, לא סותם נקבוביות, ומאזן — שגרה שמרגישה נכון מהיום הראשון.\nהסרטון הזה יסביר הכל:\n👉 https://drive.google.com/file/d/1BxCIUbxrMv18MP3pzbn1KkWeFukNcbIZ/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על טיפוח לעור שמן? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1BxCIUbxrMv18MP3pzbn1KkWeFukNcbIZ/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122397/moisturizer-oily.mp4",
+    sendPdf: false,
+    shortMessage: "*לחות מאזנת, שקופה וקלילה לעור שמן!*",
   },
   {
     name: "סרום משקם עם חומצה הילארונית",
-    message: "לחות שמגיעה לעומק 💧\nהסרום עם חומצה הילארונית בדרך אלייך — לחות שמגיעה לשכבות שקרם רגיל פשוט לא מגיע אליהן.\nממלא, מרכך, ומשאיר את העור ממולא לאורך כל היום.\nהנה איך להשתמש בו נכון:\n👉 https://drive.google.com/file/d/141aZK_-I_MVHaZRbWtXfg_QeUT8dx5_v/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על שילוב הסרום בשגרה? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/16of3CyU3Jfg2whUD-WN3L1fCs_4NN_MJ/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122396/hyaluronic-serum.mp4",
+    sendPdf: false,
+    shortMessage: "*העור שלך הולך לזהור! הסרום הלחותי שלנו פועל עם פטנט מיוחד ללחות שנשמרת 24 שעות*",
   },
   {
     name: "סרום משקם ומחדש לעור",
-    message: "כשהעור צריך ריסט אמיתי ✨\nהסרום המשקם ומחדש בדרך אלייך — כשהעור עייף, פגוע, או סתם צריך להתחדש, זה הסרום שמחזיר לו את הזוהר.\nהנה הסרטון שיראה איך לשלב אותו בשגרה:\n👉 https://drive.google.com/file/d/141aZK_-I_MVHaZRbWtXfg_QeUT8dx5_v/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על שיקום העור? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1i6MFH7H_31guh0Cc0F0RAj33_rNubTpM/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122396/repair-serum.mp4",
+    sendPdf: false,
+    shortMessage: "*הסרום שהולך לעשות לך מהפך בעור! אנא הקפידי על הוראות השימוש, להרגלת העור לחומרים הפעילים בהדרגה!*\n*במידה ומופיעה צריבה/אדמומיות יוצאות דופן — התייעצו איתנו :)*",
   },
   {
+    // ⚠️ Hebrew filename in Cloudinary — needs rename to English. Left empty until fixed.
     name: "סרום מתקן קמטים",
-    message: "ההשקעה הכי טובה שעשית לעור שלך 🌹\nהסרום מתקן הקמטים בדרך אלייך — ונגיד ישר: זה לא קסם, זה מדע.\nעובד בעומק העור, ממלא, מחליק, ועם שימוש קבוע — ההבדל פשוט לא מפסיק להפתיע.\nהנה הסרטון שיראה מתי ואיך לשלב אותו בשגרה:\n👉 https://drive.google.com/file/d/1hyqe6LSQX_nMNO9PT8nQDM0Jyywp8jq8/view?usp=drive_link\n\nאחרי כמה שבועות — נשמח לשמוע איך העור מרגיש 🌟\nדירוג קצר באתר עוזר לנו להמשיך ולהביא את הכי טוב עבורך 💛\n\nיש רצון לייעוץ על שילוב הסרום בשגרה? אנחנו כאן ונשמח לעזור 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1hyqe6LSQX_nMNO9PT8nQDM0Jyywp8jq8/view?usp=sharing"],
+    cloudinaryUrl: "",
+    sendPdf: false,
+    shortMessage: "*סרום חכם שעובד בעומק העור ונותן לו כל מה שהוא צריך, עם תוצאות שנראות לעין!*",
   },
   {
     name: "SPF 50 & לחות",
-    message: "הגנה שמרגישה כמו טיפוח ☀️\nה-SPF 50 + לחות בדרך אלייך — הגנה מהשמש ולחות בצעד אחד, בלי כבדות ובלי תחושת \"מסך\".\nאין יותר תירוצים לדלג על ה-SPF.\nהנה איך להשתמש בו נכון:\n👉 https://drive.google.com/file/d/1IMPNZgdBKxEwTmbA1X_vJACGJwG3rTt/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על שגרת הגנה יומית? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1IMPNZgdBKxEwTmbA1X_vZJACGJwG3rTt/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122393/spf50-moisturizer.mp4",
+    sendPdf: false,
+    shortMessage: "*התכשיר שמוכיח כי קרם הגנה לא חייב להיות כבד ושמנוני!*",
   },
   {
     name: "SPF 50 הגנה שקוף",
-    message: "הגנה שאי אפשר לראות ☀️\nה-SPF 50 השקוף בדרך אלייך — הגנה מלאה, אפס עקבות לבנים, ומושלם מתחת למייקאפ.\nשכבה אחרונה בבוקר, כל בוקר — זה הדבר הכי חשוב שאפשר לעשות לעור על הטווח הארוך ✅\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על שגרת הגנה? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: [],
+    cloudinaryUrl: "",
+    sendPdf: false,
+    shortMessage: "*קרם ההגנה המתקדם שלנו, עם פורמולה קלילה וחכמה! תתכונני להתמכר...*",
   },
   {
     name: "50 SPF & מייקאפ",
-    message: "הגנה שנראית כמו בייס 💄☀️\nה-SPF 50 + מייקאפ בדרך אלייך — שני בחד, בלי פשרות.\nמגן מהשמש, מעדן את הגוון, ומחזיק לאורך כל היום.\nהנה הסרטון שיראה איך להשתמש:\n👉 https://drive.google.com/file/d/1swnNnmo0ZEkR8E2G9H_3pNIrZwq_7hj0/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על שילוב עם מייקאפ? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1swnNnmo0ZEkR8E2G9H_3pNIrZwq_7hj0/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122395/spf50-makeup.mp4",
+    sendPdf: false,
+    shortMessage: "*הגנה עם פורמולה חכמה שמתאימה את עצמה לגוון עורך — אין ספק שבחרת נכון!*",
   },
   {
     name: "Bioactive skin FIX | נוזל להעלמת פצעים בגוף",
-    message: "הפתרון שחיפשת לפצעים בגוף 🌿\nה-Bioactive Skin Fix בדרך אלייך — הנוזל שעושה לפצעים בגוף מה שאף קרם לא הצליח.\nממוקד, יעיל, ועובד.\nהנה בדיוק איך להשתמש בו:\n👉 https://drive.google.com/file/d/1E6pAxTTjt5tDJ9dAUuFeHQPtpOs2zbm9/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הטיפול? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1E6pAxTTjt5tDJ9dAUuFeHQPtpOs2zbm9/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775123818/body-acne-treatment.mp4",
+    sendPdf: false,
+    shortMessage: "*נוזל הקסם שלנו! נא לשים לב להוראות השימוש, בייחוד לגבי כמות החומר. במידה ומופיעה צריבה/אדמומיות — התייעצו איתנו :)*",
   },
   {
     name: "נוזל לטיפול בפצעים בפנים",
-    message: "טיפול ממוקד, בלי לפגוע בשאר 🌿\nהנוזל לפצעים בפנים בדרך אלייך — ישירות על הפצע, בלי לייבש את שאר העור.\nהנה איך להשתמש בו בצורה הנכונה:\n👉 https://drive.google.com/file/d/1bUnHs3QWJOTfYmvduKgIbVtFG8lw--1S/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על טיפול בפצעים בפנים? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1bUnHs3QWJOTfYmvduKgIbVtFG8lw--1S/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122392/face-acne-treatment.mp4",
+    sendPdf: false,
+    shortMessage: "*נא להקפיד על הוראות השימוש, בדגש על כמות החומר על פני העור, למניעת גירוי/יובש.*\n*במידה ומופיעה צריבה/אדמומיות יוצאת דופן — התייעצו איתנו :)*",
   },
   {
+    // ⚠️ Hebrew filename in Cloudinary — needs rename to English. Left empty until fixed.
     name: "קרם מרגיע ומשקם",
-    message: "שקט לעור רגיש 🕊️\nהקרם המרגיע ומשקם בדרך אלייך — אדמומיות, רגישות, תגובות — הקרם הזה מחזיר את השקט לעור.\nעדין, מרגיע, ועובד גם בתקופות הכי רגישות.\nהסרטון יסביר מתי ואיך לשלב אותו:\n👉 https://drive.google.com/file/d/1bA8Ry4rQ-IBJX_mQwm2Jqx4Bg78Baz2-/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על טיפול בעור רגיש? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1bA8Ry4rQ-IBJX_mQwm2Jqx4Bg78Baz2-/view?usp=sharing"],
+    cloudinaryUrl: "",
+    sendPdf: false,
+    shortMessage: "*הקרם שמחזיר את הרוגע לעור שלך :)*",
   },
   {
     name: "ג'ל לטיפול בעור בעייתי ושמן",
-    message: "סוף סוף להרגיש בשליטה על העור 💚\nהג'ל לעור בעייתי ושמן בדרך אלייך — קל, יעיל, ומאזן.\nמטפל בבעיה מבלי לייבש, ומרגיש טוב על העור מהרגע הראשון.\nהנה איך לשלב אותו בשגרה:\n👉 https://drive.google.com/file/d/1cECPsqKpP-0hPmLPbApY_ra4dBN7bbrF/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על בניית שגרה לעור בעייתי? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1cECPsqKpP-0hPmLPbApY_ra4dBN7bbrF/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122388/oily-skin-gel.mp4",
+    sendPdf: false,
+    shortMessage: "*נא להקפיד על הוראות השימוש, בדגש על כמות החומר על פני העור, למניעת גירוי/יובש.*",
   },
   {
     name: "קרם-ג'ל אקטיבי לטיפול בעור אקנתי",
-    message: "הטיפול שעור אקנתי מגיע לו 💚\nהקרם-ג'ל האקטיבי בדרך אלייך — טיפולי, לא מייבש, ועובד בלי לפגוע בשכבות העור הבריאות.\nזה לא רק לכסות — זה לטפל.\nהנה איך להשתמש בו נכון:\n👉 https://drive.google.com/file/d/1JHGmrmnqxu2H596w6sSVvhrX7ThmCX7r/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על טיפול בעור אקנתי? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1JHGmrmnqxu2H596w6sSVvhrX7ThmCX7r/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122387/acne-gel.mp4",
+    sendPdf: false,
+    shortMessage: "*נא להקפיד על הוראות השימוש, בדגש על כמות החומר על פני העור, למניעת גירוי/יובש.*",
   },
   {
     name: "סרום הבהרה ליום",
-    message: "כתמים? לא עוד ✨\nסרום ההבהרה ליום בדרך אלייך — כתמי שמש, עור לא אחיד, כהות — הסרום הזה עובד בשעות שאת/ה ער/ה.\nהנה איך לשלב אותו בשגרת הבוקר:\n👉 https://drive.google.com/file/d/12Ye-sOt_tiipE1vAOAx9ki4cy5BPTUU6/view?usp=drive_link\n\nאחרי כמה שבועות — נשמח לשמוע איך העור נראה 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הבהרה ואחידות גוון? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/12Ye-sOt_tiipE1vAOAx9ki4cy5BPTUU6/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122388/brightening-serum-day.mp4",
+    sendPdf: false,
+    shortMessage: "*נא להקפיד על הוראות השימוש, בדגש על כמות החומר על פני העור, למניעת גירוי/יובש.*",
   },
   {
     name: "סרום הבהרה יום-לילה",
-    message: "עובד בשבילך גם בשעות השינה 🌙✨\nסרום ההבהרה יום-לילה בדרך אלייך — מבהיר ביום, מחדש בלילה, 24/7.\nככה נראה שיפור אמיתי ומתמשך.\nהנה איך להשתמש בו נכון:\n👉 https://drive.google.com/file/d/1GpR9mvNlFIPpHIUrhwDbxeig3_dPaUag/view?usp=drive_link\n\nאחרי כמה שבועות — נשמח לשמוע איך העור נראה 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על שגרת הבהרה? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1GpR9mvNlFIPpHIUrhwDbxeig3_dPaUag/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122387/brightening-serum-night.mp4",
+    sendPdf: false,
+    shortMessage: "*נא להקפיד על הוראות השימוש, בדגש על כמות החומר על פני העור, למניעת גירוי/יובש.*",
   },
   {
     name: "סרום משי לגוף",
-    message: "עור גוף שמרגיש כמו משי 💫\nסרום המשי לגוף בדרך אלייך — מוזן, חלק ורך מהשימוש הראשון.\nבדיוק מה שמגיע לעור שלך.\nהנה הסרטון שיראה איך להשתמש:\n👉 https://drive.google.com/file/d/15UiRch34ekkDIFv4qvuoKSli6LL5ZY9E/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על טיפוח עור הגוף? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/15UiRch34ekkDIFv4qvuoKSli6LL5ZY9E/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122387/body-serum.mp4",
+    sendPdf: false,
+    shortMessage: "*הסרום שמתאהבים בו כבר בשימוש הראשון...*",
   },
   {
     name: "מברשת עיסוי לימפטי",
-    message: "הטכניקה שמשנה את הגוף מבפנים 🌿\nמברשת העיסוי הלימפטי בדרך אלייך — אחת הטכניקות הכי עוצמתיות לגוף.\nמפחיתה נפיחות, מחיה את הזרימה, ומחלקת את העור — וחשוב לדעת לעשות אותה נכון.\nחשוב לראות את הסרטון לפני השימוש הראשון:\n👉 https://drive.google.com/file/d/141aZK_-I_MVHaZRbWtXfg_QeUT8dx5_v/view?usp=sharing\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הטכניקה או על שגרת עיסוי לימפטי? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/141aZK_-I_MVHaZRbWtXfg_QeUT8dx5_v/view?usp=sharing","https://drive.google.com/file/d/10oqY-LlT6F4Hcq1TMimYBxMUxQ3hZyTT/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775124887/cupping-glow-set.mp4",
+    sendPdf: true,
+    shortMessage: "*עיסוי עדין שיעשה לעור שלך פשוט טוב!*",
   },
   {
     name: "כוסות רוח לפנים",
-    message: "זה הטיפול שחיכית לו 🌸\nכוסות הרוח בדרך אלייך — ותכלס, זה אחד הדברים הכי כיפיים שאפשר להוסיף לשגרה.\n5 דקות, פעמיים בשבוע, ומתחילים לראות עור מורם ומהודק — כאילו עשית טיפול אצלנו בקליניקה.\nלפני שמתחילים — חשוב לראות את הסרטון:\n👉 https://drive.google.com/file/d/11iq-eNvkeUSJKHErUNEJd4aoHB6BvZsB/view?usp=drive_link\n\nאחרי כמה שימושים — נשמח לדעת מה ההתרשמות 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים נוספים לגלות את זה 💛\n\nמשהו לא ברור? אפשר תמיד לפנות אלינו לבניית שגרת טיפוח ביתי מותאמת 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/11iq-eNvkeUSJKHErUNEJd4aoHB6BvZsB/view?usp=sharing","https://drive.google.com/file/d/10oqY-LlT6F4Hcq1TMimYBxMUxQ3hZyTT/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775123830/lymphatic-guide-video.mp4",
+    sendPdf: true,
+    shortMessage: "*איזה כיף, תכף נתחיל להזרים חיים לפנים שלך!*",
   },
   {
     name: "ג'ל גבות",
-    message: "גבות שנראות מטופלות — כל יום 🌿\nג'ל הגבות בדרך אלייך — ממלא, מזין ונותן לגבות מראה מטופח ובריא מהשימוש הראשון.\nהנה איך להשתמש בו נכון:\n👉 https://drive.google.com/file/d/1eY66m5bKGgw-5xUQI_5eSx6tdC5q7Ax9/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על טיפוח גבות? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1eY66m5bKGgw-5xUQI_5eSx6tdC5q7Ax9/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122385/eyebrow-gel.mp4",
+    sendPdf: false,
+    shortMessage: "*הג'ל המושלם שלנו שלא משאיר שאריות לבנות על הגבות!*",
   },
   {
     name: "ערכת הבהרה",
-    message: "העור האחיד שתמיד רצית ✨\nערכת ההבהרה בדרך אלייך — שילוב המוצרים שעובד בסינרגיה לעור אחיד, בהיר וזוהר.\nהכנו מדריך שימוש מלא עם סדר השכבות הנכון:\n👉 https://drive.google.com/file/d/1lnIRCKpUEr8uE393GfiIJ8n48KrnWT_d/view?usp=drive_link\n\nאחרי כמה שבועות — נשמח לשמוע איך העור נראה 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הערכה או על שגרת ההבהרה? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1lnIRCKpUEr8uE393GfiIJ8n48KrnWT_d/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/image/upload/q_auto/f_auto/v1775122381/kit-brightening.jpg",
+    sendPdf: false,
+    shortMessage: "*נא להקפיד להשתמש על פי הוראות השימוש*\n*במידה ומופיעה צריבה/אדמומיות — התייעצו איתנו :)*",
   },
   {
     name: "ערכה לעור שמן",
-    message: "שגרה שסוף סוף עובדת לעור שמן 💚\nערכת עור השמן בדרך אלייך — כל מה שעור שמן צריך, בסדר הנכון ובשילוב הנכון.\nהנה המדריך שיבנה את השגרה:\n👉 https://drive.google.com/file/d/1REn8Xl9RgugoHfRQsKougks_m6fa7Hil/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הערכה? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1REn8Xl9RgugoHfRQsKougks_m6fa7Hil/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/image/upload/q_auto/f_auto/v1775122380/kit-oily.jpg",
+    sendPdf: false,
+    shortMessage: "",
   },
   {
     name: "ערכת אנטיאייג' | עור עדין",
-    message: "טיפוח שמתחשב בעור שלך 🌹\nערכת האנטיאייג' לעור עדין בדרך אלייך — כל מוצר נבחר בקפידה לעור שמגיע לו טיפול עדין ומדויק.\nהנה המדריך לבניית השגרה:\n👉 https://drive.google.com/file/d/18GTpKCEyx8E13GC2OoqNdwFqm8-lCSGW/view?usp=drive_link\n\nאחרי כמה שבועות — נשמח לשמוע איך העור מרגיש 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הערכה? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/18GTpKCEyx8E13GC2OoqNdwFqm8-lCSGW/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/image/upload/q_auto/f_auto/v1775122380/kit-antiaging.jpg",
+    sendPdf: false,
+    shortMessage: "",
   },
   {
     name: "ערכת אנטיאייג' | VIP",
-    message: "כי מגיע לך המקסימום 👑\nערכת האנטיאייג' VIP בדרך אלייך — הערכה הכי מקיפה שיש, לתוצאות שאי אפשר להתעלם מהן.\nהנה המדריך המלא לשגרת ה-VIP שלך:\n👉 https://drive.google.com/file/d/1QQ-IF-bjyeQMDLlUrGYyEmPD-mHwr6pQ/view?usp=drive_link\n\nאחרי כמה שבועות — נשמח לשמוע איך העור מרגיש 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הערכה? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1QQ-IF-bjyeQMDLlUrGYyEmPD-mHwr6pQ/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/image/upload/q_auto/f_auto/v1775122379/kit-antiaging-vip.jpg",
+    sendPdf: false,
+    shortMessage: "",
   },
   {
     name: "ערכת בייסיק גלואו",
-    message: "הבסיס לעור זוהר מתחיל כאן ✨\nערכת ה-Basic Glow בדרך אלייך — פשוט, נקי, ויעיל.\nכל מה שצריך כדי להתחיל לזהור, בלי סיבוכים.\nהנה המדריך שיראה איך להתחיל:\n👉 https://drive.google.com/file/d/1UGWzMYTCP7UnTQkSCd3Wpc6NvPp3O3os/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הערכה? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1UGWzMYTCP7UnTQkSCd3Wpc6NvPp3O3os/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/image/upload/q_auto/f_auto/v1775122378/kit-basic-glow.jpg",
+    sendPdf: false,
+    shortMessage: "",
   },
   {
     name: "ניקוי עור שמן | BETTER TOGETHER",
-    message: "השילוב שמשנה את המשחק לעור שמן 💚\nהקומבו ניקוי עור שמן בדרך אלייך — כל מוצר מחזק את השני, וביחד הם עושים את מה שכל אחד לבד לא יכול.\nהנה איך לשלב אותם נכון:\n👉 https://drive.google.com/file/d/1QMwypLyEp06LeLAo5-8YJvWkzXFI6ZzR/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הקומבו? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1QMwypLyEp06LeLAo5-8YJvWkzXFI6ZzR/view?usp=drive_link"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122403/facial-cleanser.mp4",
+    sendPdf: false,
+    shortMessage: "",
   },
   {
     name: "עור צעיר ורענן | BETTER TOGETHER",
-    message: "רעננות שמרגישים ורואים ✨\nהקומבו עור צעיר ורענן בדרך אלייך — מוצרים שתוכננו לעבוד ביחד, לעור שנראה מטופח ורענן כל יום.\nהנה הסדר הנכון לשימוש:\n👉 https://drive.google.com/file/d/141aZK_-I_MVHaZRbWtXfg_QeUT8dx5_v/view?usp=drive_link\n\nאחרי כמה שבועות — נשמח לשמוע איך העור נראה 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הקומבו? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/141aZK_-I_MVHaZRbWtXfg_QeUT8dx5_v/view?usp=drive_link"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775124887/cupping-glow-set.mp4",
+    sendPdf: true,
+    shortMessage: "*נא להקפיד על שימוש נכון בסרום הלילה, למניעת גירוי או התקלפות העור*",
   },
   {
     name: "גוף חלק וזוהר | BETTER TOGETHER",
-    message: "גוף זוהר מתחיל בשגרה נכונה 💫\nהקומבו גוף חלק וזוהר בדרך אלייך — כשמוצרים עובדים ביחד, התוצאות מדברות בעד עצמן.\nהנה איך לשלב אותם לתוצאות מקסימליות:\n👉 https://drive.google.com/file/d/1E6pAxTTjt5tDJ9dAUuFeHQPtpOs2zbm9/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על טיפוח עור הגוף? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1E6pAxTTjt5tDJ9dAUuFeHQPtpOs2zbm9/view?usp=drive_link"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775123818/body-acne-treatment.mp4",
+    sendPdf: false,
+    shortMessage: "*נא לשים לב להוראות השימוש, בייחוד לגבי כמות החומר!\n☀️בבוקר — הספגת הסרום באזור המטופל.\n🌙 בערב — שימוש בנוזל הקסם שלנו באזור המטופל.*",
   },
   {
     name: "טיפול בעור עם פצעים | BETTER TOGETHER",
-    message: "הצמד שמטפל מכל הכיוונים 🌿\nהקומבו טיפול בעור עם פצעים בדרך אלייך — ביחד הם מפחיתים פצעים, סימנים ואדמומיות טוב יותר מכל מוצר לבד.\nהנה איך לשלב אותם נכון:\n👉 https://drive.google.com/file/d/1bUnHs3QWJOTfYmvduKgIbVtFG8lw--1S/view?usp=drive_link\n\nאחרי כמה שבועות — נשמח לשמוע איך העור נראה 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הקומבו? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/1bUnHs3QWJOTfYmvduKgIbVtFG8lw--1S/view?usp=drive_link"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122392/face-acne-treatment.mp4",
+    sendPdf: false,
+    shortMessage: "*🌙 לשימוש בערב: לאחר ניקוי — נוזל פנים באצבע על האזור, המתנה 2 דק, ואז כמות קטנה של קרם.*\n*נא להקפיד על קרם הגנה בחשיפה לשמש. במידה ומופיעה צריבה — התייעצו איתנו :)*",
   },
   {
     name: "עור פנים הדוק וזוהר | BETTER TOGETHER",
-    message: "הידוק + זוהר — ביחד זה עובד אחרת 🌸\nהקומבו עור פנים הדוק וזוהר בדרך אלייך — עיסוי שמחיה את הזרימה, מהדק ונותן זוהר שאפשר לראות.\nהנה הטכניקה בסרטון:\n👉 https://drive.google.com/file/d/11iq-eNvkeUSJKHErUNEJd4aoHB6BvZsB/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הקומבו? אנחנו כאן בשבילך 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/11iq-eNvkeUSJKHErUNEJd4aoHB6BvZsB/view?usp=drive_link"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775123830/lymphatic-guide-video.mp4",
+    sendPdf: true,
+    shortMessage: "*השילוב המושלם בין סרום חכם ועיסוי עמוק שיהפכו את העור שלך לחי וזוהר 💫*",
   },
   {
     name: "עור זוהר ומורם | BETTER TOGETHER",
-    message: "להרים ולהאיר — ביחד זה אחרת ✨\nהקומבו עור זוהר ומורם בדרך אלייך — כשמוצרים מכירים אחד את השני, התוצאות הן אחרות לגמרי.\nהנה איך לשלב אותם:\n👉 https://drive.google.com/file/d/141aZK_-I_MVHaZRbWtXfg_QeUT8dx5_v/view?usp=drive_link\n\nאחרי שמנסים — נשמח לשמוע מה חשבת 🌟\nדירוג קצר באתר עוזר לנו ועוזר לאנשים אחרים לבחור נכון 💛\n\nיש שאלות על הקומבו? אפשר תמיד לפנות אלינו 🤍\n\n*הודעה זו נשלחה באופן אוטומטי. לכל פנייה ישירה אפשר להגיע אלינו במספר: 053-226-9415*",
-    media: ["https://drive.google.com/file/d/141aZK_-I_MVHaZRbWtXfg_QeUT8dx5_v/view?usp=sharing"],
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775124887/cupping-glow-set.mp4",
+    sendPdf: true,
+    shortMessage: "*השילוב המושלם בין עיסוי עדין לשחרור, והחלקה וואקום עמוק להזרמה והחייאת העור 💫*",
   },
 ];
 
-function findProduct(wixName) {
-  if (!wixName) return null;
-  const normalized = wixName.toLowerCase().replace(/[|s]+/g, ' ').trim();
-  return products.find(p => {
-    const pNorm = p.name.toLowerCase().replace(/[|s]+/g, ' ').trim();
-    const parts = pNorm.split('|').map(s => s.trim());
-    return parts.some(part => normalized.includes(part) || part.includes(normalized)) ||
-           pNorm.includes(normalized) || normalized.includes(pNorm);
-  }) || null;
+function findProduct(name) {
+  if (!name) return null;
+  const normalized = name.replace(/\|/g, " ").toLowerCase().trim();
+  return (
+    products.find((p) => p.name.toLowerCase() === name.toLowerCase()) ||
+    products.find((p) =>
+      normalized.includes(p.name.replace(/\|/g, " ").toLowerCase().trim())
+    ) ||
+    products.find((p) =>
+      p.name
+        .replace(/\|/g, " ")
+        .toLowerCase()
+        .trim()
+        .split(/\s+/)
+        .some((word) => word.length > 3 && normalized.includes(word))
+    ) ||
+    null
+  );
 }
 
-module.exports = { products, findProduct };
+module.exports = { findProduct };
