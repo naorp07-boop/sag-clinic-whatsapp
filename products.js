@@ -55,7 +55,7 @@ const products = [
     name: "סרום משקם ומחדש לעור",
     cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122396/repair-serum.mp4",
     sendPdf: false,
-    shortMessage: "*הסרום שהולך לעשות לך מהפך בעור! אנא הקפידי על הוראות השימוש, להרגלת העור לחומרים הפעילים בהדרגה!*\n*במידה ומופיעה צריבה/אדמומיות יוצאות דופן — התייעצו איתנו :)*",
+    shortMessage: "*הסרום שהולך לעשות לך מהפך בעור! הקפידי על הוראות השימוש להרגלת העור בהדרגה. במידה ומופיעה צריבה/אדמומיות — התייעצו איתנו :)*",
   },
   {
     name: "סרום מתקן קמטים",
@@ -91,12 +91,11 @@ const products = [
     name: "נוזל לטיפול בפצעים בפנים",
     cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122392/face-acne-treatment.mp4",
     sendPdf: false,
-    shortMessage: "*נא להקפיד על הוראות השימוש, בדגש על כמות החומר על פני העור, למניעת גירוי/יובש.*\n*במידה ומופיעה צריבה/אדמומיות יוצאת דופן — התייעצו איתנו :)*",
+    shortMessage: "*נא להקפיד על הוראות השימוש, בדגש על כמות החומר. במידה ומופיעה צריבה/אדמומיות — התייעצו איתנו :)*",
   },
   {
-    // ⚠️ Hebrew filename in Cloudinary — needs rename to English. Left empty until fixed.
     name: "קרם מרגיע ומשקם",
-    cloudinaryUrl: "",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122390/soothing-cream.mp4",
     sendPdf: false,
     shortMessage: "*הקרם שמחזיר את הרוגע לעור שלך :)*",
   },
@@ -152,7 +151,7 @@ const products = [
     name: "ערכת הבהרה",
     cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/image/upload/q_auto/f_auto/v1775122381/kit-brightening.jpg",
     sendPdf: false,
-    shortMessage: "*נא להקפיד להשתמש על פי הוראות השימוש*\n*במידה ומופיעה צריבה/אדמומיות — התייעצו איתנו :)*",
+    shortMessage: "*נא להקפיד להשתמש על פי הוראות השימוש. במידה ומופיעה צריבה/אדמומיות — התייעצו איתנו :)*",
   },
   {
     name: "ערכה לעור שמן",
@@ -194,13 +193,13 @@ const products = [
     name: "גוף חלק וזוהר | BETTER TOGETHER",
     cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775123818/body-acne-treatment.mp4",
     sendPdf: false,
-    shortMessage: "*נא לשים לב להוראות השימוש, בייחוד לגבי כמות החומר!\n☀️בבוקר — הספגת הסרום באזור המטופל.\n🌙 בערב — שימוש בנוזל הקסם שלנו באזור המטופל.*",
+    shortMessage: "*נא לשים לב להוראות השימוש! ☀️ בבוקר — הספגת הסרום. 🌙 בערב — שימוש בנוזל הקסם שלנו.*",
   },
   {
     name: "טיפול בעור עם פצעים | BETTER TOGETHER",
     cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775122392/face-acne-treatment.mp4",
     sendPdf: false,
-    shortMessage: "*🌙 לשימוש בערב: לאחר ניקוי — נוזל פנים באצבע על האזור, המתנה 2 דק, ואז כמות קטנה של קרם.*\n*נא להקפיד על קרם הגנה בחשיפה לשמש. במידה ומופיעה צריבה — התייעצו איתנו :)*",
+    shortMessage: "*🌙 בערב: לאחר ניקוי — נוזל פנים באצבע, המתנה 2 דק, ואז קרם. הקפידי על קרם הגנה בחשיפה לשמש. במידה ומופיעה צריבה — התייעצו איתנו :)*",
   },
   {
     name: "עור פנים הדוק וזוהר | BETTER TOGETHER",
