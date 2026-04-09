@@ -58,9 +58,8 @@ const products = [
     shortMessage: "*הסרום שהולך לעשות לך מהפך בעור! אנא הקפידי על הוראות השימוש, להרגלת העור לחומרים הפעילים בהדרגה!*\n*במידה ומופיעה צריבה/אדמומיות יוצאות דופן — התייעצו איתנו :)*",
   },
   {
-    // ⚠️ Hebrew filename in Cloudinary — needs rename to English. Left empty until fixed.
     name: "סרום מתקן קמטים",
-    cloudinaryUrl: "",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/q_auto/f_auto/v1775123814/anti-wrinkle-serum.mp4",
     sendPdf: false,
     shortMessage: "*סרום חכם שעובד בעומק העור ונותן לו כל מה שהוא צריך, עם תוצאות שנראות לעין!*",
   },
