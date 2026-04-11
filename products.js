@@ -95,7 +95,7 @@ const products = [
   },
   {
     name: "קרם מרגיע ומשקם",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/v1775122390/soothing-cream.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775122390/soothing-cream.mp4",
     sendPdf: false,
     shortMessage: "*הקרם שמחזיר את הרוגע לעור שלך :)*",
   },
@@ -107,7 +107,7 @@ const products = [
   },
   {
     name: "קרם-ג'ל אקטיבי לטיפול בעור אקנתי",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/v1775122387/acne-gel.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775122387/acne-gel.mp4",
     sendPdf: false,
     shortMessage: "*נא להקפיד על הוראות השימוש, בדגש על כמות החומר על פני העור, למניעת גירוי/יובש.*",
   },
