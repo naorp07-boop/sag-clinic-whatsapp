@@ -131,13 +131,13 @@ const products = [
   },
   {
     name: "מברשת עיסוי לימפטי",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775124887/cupping-glow-set.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,w_480/v1775124887/cupping-glow-set.mp4",
     sendPdf: true,
     shortMessage: "*עיסוי עדין שיעשה לעור שלך פשוט טוב!*",
   },
   {
     name: "כוסות רוח לפנים",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775123830/lymphatic-guide-video.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_800k/v1775123830/lymphatic-guide-video.mp4",
     sendPdf: true,
     shortMessage: "*איזה כיף, תכף נתחיל להזרים חיים לפנים שלך!*",
   },
@@ -185,7 +185,7 @@ const products = [
   },
   {
     name: "עור צעיר ורענן | BETTER TOGETHER",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775124887/cupping-glow-set.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,w_480/v1775124887/cupping-glow-set.mp4",
     sendPdf: true,
     shortMessage: "*נא להקפיד על שימוש נכון בסרום הלילה, למניעת גירוי או התקלפות העור*",
   },
@@ -203,13 +203,13 @@ const products = [
   },
   {
     name: "עור פנים הדוק וזוהר | BETTER TOGETHER",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775123830/lymphatic-guide-video.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_800k/v1775123830/lymphatic-guide-video.mp4",
     sendPdf: true,
     shortMessage: "*השילוב המושלם בין סרום חכם ועיסוי עמוק שיהפכו את העור שלך לחי וזוהר 💫*",
   },
   {
     name: "עור זוהר ומורם | BETTER TOGETHER",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775124887/cupping-glow-set.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,w_480/v1775124887/cupping-glow-set.mp4",
     sendPdf: true,
     shortMessage: "*השילוב המושלם בין עיסוי עדין לשחרור, והחלקה וואקום עמוק להזרמה והחייאת העור 💫*",
   },
