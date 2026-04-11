@@ -5,6 +5,14 @@ const { findProduct } = require("./products");
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+const SERVER_URL = process.env.SERVER_URL || "https://sag-clinic-whatsapp-production.up.railway.app";
+const ADMIN_NUMBER = "whatsapp:+972532269415";
+const ADMIN_TEMPLATE = "HX501e1d97a53b01e53c52988963cc1515";
+
+// In-memory store: messageSid → order context for failure alerts
+const pendingMessages = new Map();
 
 function getTwilioClient() {
   return twilio(
@@ -93,6 +101,45 @@ app.post("/webhook/debug", (req, res) => {
   res.json({ received: true, body: req.body });
 });
 
+// Status callback — called by Twilio when message delivery status changes
+app.post("/webhook/status", async (req, res) => {
+  res.sendStatus(200); // Always ack immediately
+
+  const { MessageSid, MessageStatus, ErrorCode } = req.body;
+  console.log(`📊 Status: ${MessageSid} → ${MessageStatus}${ErrorCode ? ` (error: ${ErrorCode})` : ""}`);
+
+  if (MessageStatus === "delivered" || MessageStatus === "read") {
+    pendingMessages.delete(MessageSid);
+    return;
+  }
+
+  if (MessageStatus !== "failed" && MessageStatus !== "undelivered") return;
+
+  const info = pendingMessages.get(MessageSid);
+  if (!info) return;
+  pendingMessages.delete(MessageSid);
+
+  console.log(`⚠️ Delivery failed for ${info.customerName} — ${info.productName} (error: ${ErrorCode})`);
+
+  try {
+    const client = getTwilioClient();
+    await client.messages.create({
+      from: process.env.TWILIO_WHATSAPP_FROM,
+      to: ADMIN_NUMBER,
+      contentSid: ADMIN_TEMPLATE,
+      contentVariables: JSON.stringify({
+        "1": info.customerName,
+        "2": `⚠️ שליחה נכשלה — ${info.productName} | שגיאה: ${ErrorCode || "לא ידוע"}`,
+        "3": info.phone,
+        "4": `${info.timestamp} | ${info.deliveryType} | יש לשלוח ידנית!`,
+      }),
+    });
+    console.log(`✅ Admin failure alert sent for ${info.customerName} — ${info.productName}`);
+  } catch (e) {
+    console.error("❌ Failed to send admin failure alert:", e.message);
+  }
+});
+
 app.post("/webhook/order", async (req, res) => {
   console.log("📦 Received order webhook");
 
@@ -170,6 +217,14 @@ app.post("/webhook/order", async (req, res) => {
 
       console.log(`📤 Sending message for: ${product.name}`);
 
+      const msgContext = {
+        customerName,
+        productName: product.name,
+        phone: rawPhone,
+        deliveryType,
+        timestamp: new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" }),
+      };
+
       if (product.cloudinaryUrl) {
         // v2 media template — sends video/image + short custom message
         const msg = await client.messages.create({
@@ -182,7 +237,9 @@ app.post("/webhook/order", async (req, res) => {
             "3": product.shortMessage || "",
             "4": product.cloudinaryUrl,
           }),
+          statusCallback: `${SERVER_URL}/webhook/status`,
         });
+        pendingMessages.set(msg.sid, msgContext);
         console.log(`✅ Message sent (v2 media). SID: ${msg.sid}`);
       } else {
         // v7 text fallback — for products without Cloudinary media
@@ -195,7 +252,9 @@ app.post("/webhook/order", async (req, res) => {
             "2": product.name,
             "3": "",
           }),
+          statusCallback: `${SERVER_URL}/webhook/status`,
         });
+        pendingMessages.set(msg.sid, msgContext);
         console.log(`✅ Message sent (v7 fallback). SID: ${msg.sid}`);
       }
       sentProducts.push(product.name);
