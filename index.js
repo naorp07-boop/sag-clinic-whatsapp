@@ -14,6 +14,10 @@ const ADMIN_TEMPLATE = "HX501e1d97a53b01e53c52988963cc1515";
 // In-memory store: messageSid → order context for failure alerts
 const pendingMessages = new Map();
 
+// Idempotency guard: order IDs already processed (prevents duplicate Wix webhooks)
+const processedOrders = new Set();
+const ORDER_DEDUP_TTL_MS = 10 * 60 * 1000; // 10 minutes
+
 function getTwilioClient() {
   return twilio(
     process.env.TWILIO_ACCOUNT_SID,
@@ -151,6 +155,24 @@ app.post("/webhook/order", async (req, res) => {
 
     // Wix wraps payload in body.data — support both formats
     const data = body?.data || body;
+
+    // ── Idempotency guard ──────────────────────────────────────────────────────
+    // Wix occasionally fires the same webhook twice for the same order.
+    // Sending an identical WhatsApp template to the same number within minutes
+    // triggers error 63049 (duplicate/spam block) from WhatsApp.
+    // Solution: track order IDs and skip if already processed.
+    const orderId = data?.id || data?.orderId;
+    if (orderId) {
+      if (processedOrders.has(orderId)) {
+        console.log(`⏭️ Duplicate webhook for order ${orderId} — skipping`);
+        return res.json({ success: true, skipped: true, reason: "duplicate_order" });
+      }
+      processedOrders.add(orderId);
+      // Auto-clean after 10 minutes to avoid memory leak
+      setTimeout(() => processedOrders.delete(orderId), ORDER_DEDUP_TTL_MS);
+      console.log(`🔑 Processing order ${orderId} for the first time`);
+    }
+    // ──────────────────────────────────────────────────────────────────────────
 
     // Extract buyer info (support all Wix payload formats incl. store pickup)
     const shipContact = data?.logistics?.shippingDestination?.contactDetails;
