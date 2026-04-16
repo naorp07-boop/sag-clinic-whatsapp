@@ -97,6 +97,38 @@ app.get("/media/:key", (req, res) => {
   res.redirect(301, url);
 });
 
+// Incoming message — forwarded to admin when customer replies to the Twilio number
+app.post("/webhook/incoming", async (req, res) => {
+  res.sendStatus(200); // Always ack immediately (prevents Twilio retry)
+
+  const from = req.body?.From || "לא ידוע";
+  const body = req.body?.Body || "";
+  const profileName = req.body?.ProfileName || "";
+
+  const customerDisplay = profileName ? `${profileName} (${from})` : from;
+  console.log(`📨 Incoming message from ${customerDisplay}: ${body}`);
+
+  if (!body.trim()) return; // Ignore empty messages
+
+  try {
+    const client = getTwilioClient();
+    await client.messages.create({
+      from: process.env.TWILIO_WHATSAPP_FROM,
+      to: ADMIN_NUMBER,
+      contentSid: ADMIN_TEMPLATE,
+      contentVariables: JSON.stringify({
+        "1": profileName || from,
+        "2": `💬 הודעה נכנסת: ${body}`,
+        "3": from.replace("whatsapp:", ""),
+        "4": new Date().toLocaleString("he-IL", { timeZone: "Asia/Jerusalem" }),
+      }),
+    });
+    console.log(`✅ Incoming message forwarded to admin from ${customerDisplay}`);
+  } catch (e) {
+    console.error("❌ Failed to forward incoming message:", e.message);
+  }
+});
+
 // Debug endpoint — always returns 200, logs everything received
 app.post("/webhook/debug", (req, res) => {
   console.log("🔍 DEBUG webhook hit!");
