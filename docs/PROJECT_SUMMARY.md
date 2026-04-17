@@ -8,15 +8,13 @@
 
 ## מה הפרויקט עושה
 
-מערכת אוטומציה: כאשר לקוח קונה מוצר בחנות Wix של SAG Clinic, נשלחת הודעת WhatsApp אוטומטית עם סרטון/תמונת הדרכה למוצר + מלל קצר מותאם. בנוסף, נשלחת הודעת אישור לאדמין עם פרטי ההזמנה. מוצרי לימפטי מקבלים גם קרוסל מדריך (5 תמונות). אם ההזמנה היא לאיסוף עצמי, הלקוח מקבל הודעה נוספת לתיאום הגעה.
+מערכת אוטומציה: כאשר לקוח קונה מוצר בחנות Wix של SAG Clinic, נשלחת הודעת WhatsApp אוטומטית עם סרטון/תמונת הדרכה למוצר + מלל קצר מותאם. בנוסף, נשלחת הודעת אישור לאדמין עם פרטי ההזמנה. מוצרי לימפטי מקבלים גם קרוסל מדריך (5 תמונות). אם ההזמנה היא לאיסוף עצמי, הלקוח מקבל הודעה נוספת לתיאום הגעה. אם לקוח עונה להודעה — ההודעה מועברת לאדמין.
 
-**זרימה:**
+**זרימה יוצאת (הזמנה):**
 ```
 לקוח קונה ב-Wix
      ↓
-Wix Automation שולח HTTP POST
-     ↓
-שרת Node.js ב-Railway מקבל את ה-webhook
+Wix Automation שולח HTTP POST → /webhook/order
      ↓
 שולח הודעת מדריך מוצר ללקוח (Twilio WhatsApp) [v2 media / v7 text fallback]
      ↓ [אם sendPdf=true]
@@ -25,8 +23,17 @@ Wix Automation שולח HTTP POST
 שולח הודעת תיאום איסוף ללקוח
      ↓
 שולח הודעת אישור לאדמין
-     ↓ [אם הודעה נכשלה — async callback]
+     ↓ [אם הודעה נכשלה — async via /webhook/status]
 שולח התראת כשל לאדמין עם פרטי ההזמנה
+```
+
+**זרימה נכנסת (לקוח עונה):**
+```
+לקוח שולח הודעה ל-+15559237951
+     ↓
+Twilio POST → /webhook/incoming
+     ↓
+שרת מעביר לאדמין: שם + הודעה + מספר + שעה
 ```
 
 ---
@@ -40,6 +47,7 @@ Wix Automation שולח HTTP POST
 | **Server** | https://sag-clinic-whatsapp-production.up.railway.app |
 | **GitHub** | https://github.com/naorp07-boop/sag-clinic-whatsapp |
 | **Wix Automation URL** | `https://sag-clinic-whatsapp-production.up.railway.app/webhook/order` |
+| **Twilio Incoming Webhook** | `https://sag-clinic-whatsapp-production.up.railway.app/webhook/incoming` |
 | **Health Check** | `https://sag-clinic-whatsapp-production.up.railway.app/health` |
 | **Debug Endpoint** | `POST /webhook/debug` |
 | **Cloudinary Cloud** | `dfwsuzo3o` |
@@ -58,17 +66,41 @@ Wix Automation שולח HTTP POST
 
 ```
 sag-clinic-whatsapp/
-├── index.js           ← שרת Express ראשי, כל הלוגיקה
-├── products.js        ← 35 מוצרים: name, cloudinaryUrl, sendPdf, shortMessage
-├── TEMPLATES.md       ← סיכום טמפלטי WhatsApp (SID, סטטוס, משתנים)
-├── PROJECT_SUMMARY.md ← המסמך הזה
-├── test-batch.js      ← סקריפט בדיקה — שולח לכל המוצרים
-├── test-lymphatic.js  ← סקריפט בדיקה ספציפי למברשת לימפטי
-├── create-carousel.js ← יצירת טמפלט carousel ב-Twilio API
+├── index.js              ← שרת Express ראשי, כל הלוגיקה
+├── products.js           ← 35 מוצרים: name, cloudinaryUrl, sendPdf, shortMessage
 ├── package.json
-├── .env               ← credentials (לא ב-git)
-└── .gitignore
+├── .env                  ← credentials (לא ב-git)
+├── .gitignore
+│
+├── docs/                 ← תיעוד
+│   ├── PROJECT_SUMMARY.md  ← המסמך הזה
+│   ├── TEMPLATES.md        ← סיכום טמפלטי WhatsApp
+│   ├── sag-flow-philosophy.md
+│   ├── sag-flow.png
+│   └── whatsapp-automation-service-guide.docx
+│
+├── scripts/              ← כלי עזר (לא חלק מהשרת)
+│   ├── test-batch.js       ← שולח בדיקה לכל המוצרים
+│   ├── test-lymphatic.js   ← בדיקה ספציפית למברשת לימפטי
+│   └── create-carousel.js  ← יצירת טמפלט carousel ב-Twilio API
+│
+├── logs/                 ← קובצי לוג CSV (מוחרגים מ-git)
+├── media/                ← קבצי מקור mp4/MOV/PDF (מוחרגים מ-git, כבר ב-Cloudinary)
+└── guides/               ← PDF מדריך לימפטי (ב-git, מוגש מ-GitHub raw)
 ```
+
+---
+
+## Endpoints — סיכום
+
+| Method | Path | מטרה |
+|--------|------|------|
+| GET | `/health` | בדיקת תקינות שרת |
+| GET | `/media/:key` | redirect ל-Cloudinary לפי מפתח מוצר |
+| POST | `/webhook/order` | קבלת הזמנה מ-Wix → שליחת WhatsApp ללקוח + אדמין |
+| POST | `/webhook/status` | קבלת עדכון סטטוס מ-Twilio → התראת כשל לאדמין |
+| POST | `/webhook/incoming` | קבלת הודעה נכנסת מלקוח → העברה לאדמין |
+| POST | `/webhook/debug` | לוגינג בלבד (לפיתוח) |
 
 ---
 
@@ -77,10 +109,10 @@ sag-clinic-whatsapp/
 כל מוצר מכיל:
 ```js
 {
-  name: "שם המוצר",          // לצורך matching עם שם המוצר ב-Wix
+  name: "שם המוצר",           // לצורך matching עם שם המוצר ב-Wix
   cloudinaryUrl: "https://...", // URL וידאו/תמונה מ-Cloudinary (ריק = fallback לטקסט)
-  sendPdf: false,             // true = שלח גם קרוסל מדריך לימפטי אחרי ההודעה
-  shortMessage: "*מלל קצר*", // {{3}} בטמפלט — מלל מותאם למוצר
+  sendPdf: false,              // true = שלח גם קרוסל מדריך לימפטי אחרי ההודעה
+  shortMessage: "*מלל קצר*",  // {{3}} בטמפלט — מלל מותאם למוצר
 }
 ```
 
@@ -93,7 +125,7 @@ sag-clinic-whatsapp/
 **חשוב:**
 - WhatsApp דורש H264 — תמיד יש `vc_h264` בURL
 - WhatsApp מגביל 16MB — וידאואים ארוכים דורשים `br_XXXk`
-- לאחר הוספת transformation חדש — חובה להריץ Eager transformation ב-Cloudinary API (ראה סקריפט test-batch.js)
+- לאחר הוספת transformation חדש — חובה להריץ Eager transformation ב-Cloudinary API
 
 **מוצרים ללא cloudinaryUrl (4):**
 מסיכת פילינג משייפת, zero shine mask, סרום ויטמין C, SPF 50 הגנה שקוף — ממתינים לסרטונים.
@@ -118,10 +150,10 @@ sag-clinic-whatsapp/
 - **מתי:** מוצרים ללא `cloudinaryUrl`
 - **משתנים:** `{{1}}`=שם, `{{2}}`=מוצר, `{{3}}`=ריק
 
-### 4. `sag_clinic_admin_order_v2` ← אדמין
+### 4. `sag_clinic_admin_order_v2` ← אדמין (הזמנה + כשל + הודעה נכנסת)
 - **SID:** `HX501e1d97a53b01e53c52988963cc1515`
-- **מתי:** כל הזמנה (גם כשל)
-- **משתנים:** `{{1}}`=שם, `{{2}}`=מוצר (או הודעת כשל), `{{3}}`=טלפון, `{{4}}`=שעה+סוג משלוח
+- **מתי:** כל הזמנה / כשל הודעה / הודעה נכנסת מלקוח
+- **משתנים:** `{{1}}`=שם, `{{2}}`=מוצר/הודעה, `{{3}}`=טלפון, `{{4}}`=שעה+סוג
 
 ### 5. `sag_clinic_pickup_ready_v2` ← איסוף
 - **SID:** `HXbf5fc8087b19b8608e1f273c762793cf`
@@ -135,9 +167,36 @@ sag-clinic-whatsapp/
 כל הודעה נשלחת עם `statusCallback: SERVER_URL/webhook/status`.
 כאשר Twilio מקבל עדכון סטטוס מ-Meta:
 - `delivered` / `read` → מחיקה מ-pendingMessages
-- `failed` / `undelivered` → שליחת התראה לאדמין (`sag_clinic_admin_order_v2`) עם פרטי ההזמנה ומספר השגיאה
+- `failed` / `undelivered` → שליחת התראה לאדמין עם פרטי ההזמנה ומספר השגיאה
 
 **מצב:** פעיל בייצור מ-12.04.2026
+
+---
+
+## מנגנון הודעות נכנסות (Incoming Webhook)
+
+כאשר לקוח עונה לאחת מהודעות SAG Clinic:
+- Twilio שולח POST ל-`/webhook/incoming`
+- השרת שולח לאדמין דרך `sag_clinic_admin_order_v2` עם:
+  - `{{1}}` = שם הלקוח (ProfileName) או המספר
+  - `{{2}}` = 💬 הודעה נכנסת: [תוכן]
+  - `{{3}}` = מספר הטלפון
+  - `{{4}}` = שעת קבלה
+
+**הגדרה ב-Twilio Console:**
+Messaging → Senders → WhatsApp Senders → +15559237951
+→ "Webhook URL for incoming messages" = `https://sag-clinic-whatsapp-production.up.railway.app/webhook/incoming`
+
+**מצב:** פעיל בייצור מ-16.04.2026
+
+---
+
+## מנגנון מניעת כפילויות (Idempotency)
+
+Wix לפעמים שולח את אותו webhook פעמיים/שלוש לאותה הזמנה.
+- `processedOrders` Set — שומר orderId שכבר טופל
+- TTL: 10 דקות (מניעת memory leak)
+- שגיאה 63049: Meta חוסם שליחה זהה לאותו מספר בזמן קצר — מנגנון זה מונע את זה
 
 ---
 
@@ -163,6 +222,8 @@ sag-clinic-whatsapp/
   - URL: `https://sag-clinic-whatsapp-production.up.railway.app/webhook/order`
   - Body: `Entire payload`
 
+**סטטוס: ✅ פעיל מ-15.04.2026**
+
 ---
 
 ## Railway — Deploy
@@ -178,9 +239,10 @@ sag-clinic-whatsapp/
 | קוד | משמעות | פתרון |
 |-----|---------|--------|
 | **21656** | contentVariables לא תקין (שדה ריק) | ודא שכל שדות המשתנים אינם ריקים |
-| **63013** | Marketing throttle — יותר מדי הודעות לנמען/חשבון | המתן 24 שעות; בייצור לא יקרה |
+| **63013** | Marketing throttle — חריגה ממגבלת Tier 1 (250/יום) | המתן 24 שעות; בייצור לא יקרה |
 | **63019** | מדיה לא הורדה | וידאו חייב H264 ≤16MB; הרץ Eager transformation |
 | **63021** | מספר לא פעיל ב-WhatsApp | לא ניתן לתקן — לקוח לא רשום ב-WhatsApp |
+| **63049** | הודעה כפולה — Meta חסם | מנגנון idempotency בשרת מונע זאת |
 
 ---
 
@@ -189,10 +251,10 @@ sag-clinic-whatsapp/
 **מה זה:** כדי ש-WhatsApp יוכל להוריד וידאו מ-Cloudinary, הגרסה המקודדת חייבת להיות מוכנה מראש ב-origin storage. בלי זה Cloudinary מקודד בזמן אמת — לוקח יותר מדי ולWhatsApp נגמר ה-timeout (63019).
 
 **כיצד להריץ:**
-```js
-// POST https://api.cloudinary.com/v1_1/dfwsuzo3o/video/explicit
-// Auth: Basic base64(API_KEY:API_SECRET)
-// Body (form-urlencoded):
+```
+POST https://api.cloudinary.com/v1_1/dfwsuzo3o/video/explicit
+Auth: Basic base64(API_KEY:API_SECRET)
+Body (application/x-www-form-urlencoded):
 public_id=eyebrow-gel&type=upload&eager=vc_h264&eager_async=false
 ```
 
@@ -207,7 +269,7 @@ public_id=eyebrow-gel&type=upload&eager=vc_h264&eager_async=false
 curl https://sag-clinic-whatsapp-production.up.railway.app/health
 
 # 2. בדיקת מוצר ספציפי
-node test-batch.js  # עדכן את TESTS עם המוצר הרצוי
+node scripts/test-batch.js
 
 # 3. בדיקת webhook מלאה
 node -e "
@@ -241,6 +303,8 @@ req.write(body); req.end();
 | 63019 — וידאו גדול מ-16MB | br_280k,w_480 (cupping) / br_800k (lymphatic) |
 | 21656 — contentVariables | shortMessage ריק — מולא לכל המוצרים |
 | carousel נדחה | UTILITY לא תומך carousel — שינוי ל-MARKETING |
+| 63049 — כפילות webhook | מנגנון processedOrders עם TTL 10 דקות |
+| לקוח עונה — לא ידוע | /webhook/incoming מעביר הודעות נכנסות לאדמין |
 
 ---
 
@@ -249,15 +313,13 @@ req.write(body); req.end();
 | סטטוס | כמות | מוצרים |
 |--------|------|---------|
 | ✅ אומת ועובד | 24 | קצף ניקוי, toner, לחות עשירה, חומצה הילארונית, סרום משקם, Bioactive, נוזל פצעים, לחות מאזנת, SPF×2, SPF מייקאפ, סרום משי, מברשת לימפטי, כוסות רוח, 5× BETTER TOGETHER, ג'ל עור בעייתי, קרם-ג'ל אקנה, קרם מרגיע |
-| ⏳ ממתין לאישור (63013 throttle) | 6 | 5 ערכות + ערכת הבהרה — יפתרו מחר |
-| ⏳ ממתין לבדיקה (vc_h264 eager) | 7 | ג'ל גבות, SPF50 לחות, הבהרה×2, סרום קמטים, cupping, lymphatic |
+| ⏳ ממתין לבדיקה | 7 | ג'ל גבות, SPF50 לחות, הבהרה×2, סרום קמטים, cupping, lymphatic |
 | ❌ ללא מדיה — fallback v7 | 4 | מסיכת פילינג, zero shine, ויטמין C, SPF שקוף |
 
 ---
 
 ## שדרוג עתידי
 
-1. **הפעלת Wix Automation** — לאחר אישור כל המוצרים
-2. **הוספת סרטונים ל-4 מוצרים חסרים** — להעלות ל-Cloudinary + Eager + עדכון products.js
-3. **מעבר מ-Sandbox לייצור** — Twilio WhatsApp Business account
-4. **מספר ישראלי** — הודעות מגיעות כרגע ממספר אמריקאי (+1 555)
+1. **הוספת סרטונים ל-4 מוצרים חסרים** — להעלות ל-Cloudinary + Eager + עדכון products.js
+2. **מעבר מ-Sandbox לייצור** — Twilio WhatsApp Business account
+3. **מספר ישראלי** — הודעות מגיעות כרגע ממספר אמריקאי (+1 555)

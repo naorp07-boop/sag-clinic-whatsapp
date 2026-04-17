@@ -1,2 +1,16 @@
 node_modules
 .env
+
+# Logs and data exports
+logs/
+*.csv
+*.xlsx
+
+# Source media files (already uploaded to Cloudinary)
+media/
+*.mp4
+*.MOV
+*.mov
+
+# Misc
+.claude/
