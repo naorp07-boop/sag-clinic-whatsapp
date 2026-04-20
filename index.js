@@ -235,7 +235,12 @@ app.post("/webhook/order", async (req, res) => {
       shipContact?.phone ||
       contactPhone;
     const lineItems = data?.lineItems || data?.orderedItems || [];
-    const isPickup = data?.logistics?.shippingDestination?.pickupMethod === "STORE_PICKUP";
+    // Wix nests pickupMethod under shippingInfo.logistics (not directly under logistics).
+    // We check both paths for forward-compatibility with any future Wix payload changes.
+    const isPickup =
+      data?.shippingInfo?.logistics?.shippingDestination?.pickupMethod === "STORE_PICKUP" ||
+      data?.logistics?.shippingDestination?.pickupMethod === "STORE_PICKUP" ||
+      (data?.shippingInfo?.title || "").includes("איסוף");
     const deliveryType = isPickup ? "🏪 איסוף מהקליניקה" : "🚚 משלוח";
 
     console.log(`👤 Customer: ${customerName}`);
