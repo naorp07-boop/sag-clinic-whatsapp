@@ -131,7 +131,7 @@ const products = [
   },
   {
     name: "מברשת עיסוי לימפטי",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,ar_9:16,c_fill/v1775124887/cupping-glow-set.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,w_480/v1775124887/cupping-glow-set.mp4",
     sendPdf: true,
     shortMessage: "*עיסוי עדין שיעשה לעור שלך פשוט טוב!*",
   },
@@ -185,7 +185,7 @@ const products = [
   },
   {
     name: "עור צעיר ורענן | BETTER TOGETHER",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,ar_9:16,c_fill/v1775124887/cupping-glow-set.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,w_480/v1775124887/cupping-glow-set.mp4",
     sendPdf: true,
     shortMessage: "*נא להקפיד על שימוש נכון בסרום הלילה, למניעת גירוי או התקלפות העור*",
   },
@@ -209,7 +209,7 @@ const products = [
   },
   {
     name: "עור זוהר ומורם | BETTER TOGETHER",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,ar_9:16,c_fill/v1775124887/cupping-glow-set.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264,br_280k,w_480/v1775124887/cupping-glow-set.mp4",
     sendPdf: true,
     shortMessage: "*השילוב המושלם בין עיסוי עדין לשחרור, והחלקה וואקום עמוק להזרמה והחייאת העור 💫*",
   },
