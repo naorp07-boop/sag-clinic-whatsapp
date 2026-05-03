@@ -77,7 +77,7 @@ const products = [
   },
   {
     name: "50 SPF & מייקאפ",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775122395/spf50-makeup.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1777833325/50_Spf_%D7%9E%D7%99%D7%99%D7%A7%D7%90%D7%A4_xtk3as.mp4",
     sendPdf: false,
     shortMessage: "*הגנה עם פורמולה חכמה שמתאימה את עצמה לגוון עורך — אין ספק שבחרת נכון!*",
   },
