@@ -83,7 +83,7 @@ const products = [
   },
   {
     name: "Bioactive skin FIX | נוזל להעלמת פצעים בגוף",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/v1775123818/body-acne-treatment.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775123818/body-acne-treatment.mp4",
     sendPdf: false,
     shortMessage: "*נוזל הקסם שלנו! נא לשים לב להוראות השימוש, בייחוד לגבי כמות החומר. במידה ומופיעה צריבה/אדמומיות — התייעצו איתנו :)*",
   },
@@ -191,7 +191,7 @@ const products = [
   },
   {
     name: "גוף חלק וזוהר | BETTER TOGETHER",
-    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/v1775123818/body-acne-treatment.mp4",
+    cloudinaryUrl: "https://res.cloudinary.com/dfwsuzo3o/video/upload/vc_h264/v1775123818/body-acne-treatment.mp4",
     sendPdf: false,
     shortMessage: "*נא לשים לב להוראות השימוש! ☀️ בבוקר — הספגת הסרום. 🌙 בערב — שימוש בנוזל הקסם שלנו.*",
   },
